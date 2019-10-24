@@ -1,0 +1,5 @@
+.DS_Store
+.idea
+target
+.scalafix.conf
+.scalafmt.conf
