@@ -1,1 +1,1 @@
-addSbtPlugin("com.alejandrohdezma" % "sbt-me" % "0.1.1")
+addSbtPlugin("com.alejandrohdezma" % "sbt-me" % "0.2.0")
