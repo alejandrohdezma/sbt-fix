@@ -38,7 +38,7 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
       scalafmtConfig         := scalafmtDownloadConfig.value
     )
 
-  private val scalafmtDownloadConfig: Def.Initialize[Task[File]] = Def.task {
+  private lazy val scalafmtDownloadConfig: Def.Initialize[Task[File]] = Def.task {
     copyRemoteFile(sLog.value.info)(
       from = scalafmtConfigLocation.value,
       to = scalafmtConfig.value,
@@ -46,7 +46,7 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
     )
   }
 
-  private val defaultScalafmtConfigLocation =
+  private lazy val defaultScalafmtConfigLocation =
     "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/master/.scalafmt.conf"
 
 }

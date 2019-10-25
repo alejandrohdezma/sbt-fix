@@ -55,7 +55,7 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
     Command.process(command, state)
   }
 
-  private val scalafixDownloadConfig = Def.setting {
+  private lazy val scalafixDownloadConfig = Def.setting {
     Some(
       copyRemoteFile(sLog.value.info)(
         from = scalafixConfigLocation.value,
@@ -65,13 +65,13 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
     )
   }
 
-  private val scalafixDefaultRules: Seq[ModuleID] = Seq(
+  private lazy val scalafixDefaultRules: Seq[ModuleID] = Seq(
     "com.github.vovapolu" %% "scaluzzi"         % "0.1.3",
     "com.nequissimus"     %% "sort-imports"     % "0.3.0",
     "com.eed3si9n.fix"    %% "scalafix-noinfer" % "0.1.0-M1"
   )
 
-  private val defaultScalafixConfigLocation =
+  private lazy val defaultScalafixConfigLocation =
     "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/master/.scalafix.conf"
 
 }
