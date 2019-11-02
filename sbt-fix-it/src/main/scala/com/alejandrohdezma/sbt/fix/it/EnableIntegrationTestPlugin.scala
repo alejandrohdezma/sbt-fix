@@ -10,6 +10,17 @@ import org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings
 import scalafix.sbt.ScalafixPlugin
 import scalafix.sbt.ScalafixPlugin.autoImport.scalafixConfigSettings
 
+/**
+ * This plugin activates the `IntegrationTest` configuration by
+ * default in all projects and adds the scalafix/scalafmt
+ * settings for the `it` configuration.
+ *
+ * If this is not the desired outcome for a certain project add:
+ *
+ * {{{
+ * .disablePlugins(EnableIntegrationTestPlugin)
+ * }}}
+ */
 object EnableIntegrationTestPlugin extends AutoPlugin {
 
   override def trigger: PluginTrigger = allRequirements
