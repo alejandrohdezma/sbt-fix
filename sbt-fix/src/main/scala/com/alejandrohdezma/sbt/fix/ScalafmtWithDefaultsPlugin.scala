@@ -47,6 +47,6 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
   }
 
   private lazy val defaultScalafmtConfigLocation =
-    "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/master/.scalafmt.conf"
+    "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/7d65a4c/.scalafmt.conf"
 
 }

@@ -72,6 +72,6 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   )
 
   private lazy val defaultScalafixConfigLocation =
-    "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/master/.scalafix.conf"
+    "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/7d65a4c/.scalafix.conf"
 
 }
