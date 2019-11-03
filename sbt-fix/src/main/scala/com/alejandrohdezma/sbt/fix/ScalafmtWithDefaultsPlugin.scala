@@ -15,7 +15,7 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
   object autoImport {
 
     lazy val scalafmtConfigLocation: SettingKey[String] = settingKey[String] {
-      s"Location of the remote scalafmt config. Defaults to $defaultScalafmtConfigLocation"
+      s"Location of the remote scalafmt config. Defaults to ${Defaults.scalafmt}"
     }
 
     lazy val scalafmtExtraConfig: SettingKey[File] = settingKey[File] {
@@ -33,7 +33,7 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   override def buildSettings: Seq[Setting[_]] =
     Seq(
-      scalafmtConfigLocation := defaultScalafmtConfigLocation,
+      scalafmtConfigLocation := Defaults.scalafmt,
       scalafmtExtraConfig    := file(".scalafmt-extra.conf"),
       scalafmtConfig         := scalafmtDownloadConfig.value
     )
@@ -45,8 +45,5 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
       including = scalafmtExtraConfig.value
     )
   }
-
-  private lazy val defaultScalafmtConfigLocation =
-    "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/7d65a4c/.scalafmt.conf"
 
 }

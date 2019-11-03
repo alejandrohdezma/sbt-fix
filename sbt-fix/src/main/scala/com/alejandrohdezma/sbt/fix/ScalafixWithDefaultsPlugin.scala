@@ -20,7 +20,7 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   object autoImport {
 
     lazy val scalafixConfigLocation: SettingKey[String] = settingKey[String] {
-      s"Location of the remote scalafix config. Defaults to $defaultScalafixConfigLocation"
+      s"Location of the remote scalafix config. Defaults to ${Defaults.scalafix}"
     }
 
     lazy val scalafixExtraConfig: SettingKey[File] = settingKey[File] {
@@ -39,7 +39,7 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   override def buildSettings: Seq[Setting[_]] = Seq(
     scalafixExtraConfig               := file(".scalafix-extra.conf"),
     scalafixConfig                    := scalafixDownloadConfig.value,
-    scalafixConfigLocation            := defaultScalafixConfigLocation,
+    scalafixConfigLocation            := Defaults.scalafix,
     scalacOptions                     += "-P:semanticdb:synthetics:on",
     scalafixDependencies in ThisBuild ++= scalafixDefaultRules,
     addCompilerPlugin(scalafixSemanticdb)
@@ -70,8 +70,5 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
     "com.nequissimus"     %% "sort-imports"     % "0.3.0",
     "com.eed3si9n.fix"    %% "scalafix-noinfer" % "0.1.0-M1"
   )
-
-  private lazy val defaultScalafixConfigLocation =
-    "https://raw.githubusercontent.com/alejandrohdezma/sbt-fix-defaults/7d65a4c/.scalafix.conf"
 
 }
