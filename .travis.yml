@@ -19,7 +19,16 @@ jobs:
       script: sbt test
     - stage: release
       env: RELEASE="true"
-      script: sbt ci-release
+      script: sbt ci-release mdoc
+      before_deploy: mv sbt-fix/target/mdoc/README.md .
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        target_branch: master
+        github_token: $GITHUB_PERSONAL_ACCESS_TOKEN
+        keep_history: true
+        on:
+          branch: master
 
 cache:
   directories:
