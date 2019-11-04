@@ -30,7 +30,7 @@ jobs:
         github_token: $GITHUB_PERSONAL_ACCESS_TOKEN
         keep_history: true
         on:
-          branch: master
+          tags: true
 
 cache:
   directories:
