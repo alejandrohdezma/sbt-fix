@@ -1,5 +1,7 @@
 language: scala
 
+if: sender != "traviscibot"
+
 before_install:
   - git fetch --tags
 
