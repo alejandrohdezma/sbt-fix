@@ -4,6 +4,7 @@ ThisBuild / repository   := "sbt-fix"
 lazy val `root` = project
   .in(file("."))
   .aggregate(`sbt-fix`, `sbt-fix-it`)
+  .settings(name := "sbt-fix")
   .settings(skip in publish := true)
 
 lazy val `sbt-fix` = project
