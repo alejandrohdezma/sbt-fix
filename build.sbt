@@ -1,5 +1,4 @@
 ThisBuild / scalaVersion := "2.12.10"
-ThisBuild / repository   := "sbt-fix"
 
 lazy val `root` = project
   .in(file("."))
