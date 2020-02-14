@@ -1,6 +1,8 @@
 ThisBuild / scalaVersion := "2.12.10"
 
-lazy val `root` = project
+Global / onChangedBuildSource := ReloadOnSourceChanges
+
+lazy val root = project
   .in(file("."))
   .aggregate(`sbt-fix`, `sbt-fix-it`)
   .settings(name := "sbt-fix")
