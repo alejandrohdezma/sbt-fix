@@ -2,6 +2,9 @@ ThisBuild / scalaVersion := "2.12.10"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+addCommandAlias("ci-test", "fix --check; mdoc")
+addCommandAlias("ci-docs", "mdoc; headerCreateAll")
+
 lazy val root = project
   .in(file("."))
   .aggregate(`sbt-fix`, `sbt-fix-it`)
