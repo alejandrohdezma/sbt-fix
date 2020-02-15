@@ -21,5 +21,6 @@ lazy val `sbt-fix` = project
   .settings(libraryDependencies += "org.scalaj" %% "scalaj-http" % "2.4.2")
 
 lazy val `sbt-fix-it` = project
+  .settings(description := "Enables scalafix/scalafmt settings in it configuration")
   .enablePlugins(SbtPlugin)
   .dependsOn(`sbt-fix`)
