@@ -19,9 +19,6 @@ package com.alejandrohdezma.sbt
 import sbt._
 import sbt.io.IO
 
-import scalaj.http.Http
-import scalaj.http.HttpOptions.followRedirects
-
 package object fix {
 
   /** Extracts from the state the list of configurations with the scalafix task */
@@ -51,12 +48,9 @@ package object fix {
          |# not be edited nor added to source control systems.
          |# Extra configurations can be added to ${including.name}""".stripMargin
 
-    lazy val localContent = IO.read(to)
-    lazy val extraContent = IO.read(including)
-    lazy val remoteContent = header + "\n\n" + Http(from)
-      .option(followRedirects(true))
-      .asString
-      .body
+    lazy val localContent  = IO.read(to)
+    lazy val extraContent  = IO.read(including)
+    lazy val remoteContent = header + "\n\n" + http.client.get(from)
 
     lazy val download     = log(s"Downloading $to from $from ...") → IO.write(to, remoteContent)
     lazy val includeExtra = log(s"Appending $including ...")       → IO.append(to, s"\n\n$extraContent")
