@@ -1,6 +1,6 @@
 # SBT plugin that enhances scalafix & scalafmt duo
 
-[![][travis-badge]][travis] [![][maven-badge]][maven] [![][steward-badge]][steward] [![][mergify-badge]][mergify]
+[![][github-action-badge]][github-action] [![][maven-badge]][maven] [![][steward-badge]][steward]  [![][mergify-badge]][mergify]
 
 ## Installation
 
@@ -100,8 +100,8 @@ lazy val `my-project` = project
 -  .settings(inConfig(IntegrationTest)(org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings))
 ```
 
-[travis]: https://travis-ci.com/alejandrohdezma/sbt-fix
-[travis-badge]: https://travis-ci.com/alejandrohdezma/sbt-fix.svg?branch=master
+[github-action]: https://github.com/alejandrohdezma/sbt-github/actions
+[github-action-badge]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Falejandrohdezma%2Fsbt-github%2Fbadge%3Fref%3Dmaster&style=flat
 
 [maven]: https://search.maven.org/search?q=g:%20com.alejandrohdezma%20AND%20a:sbt-fix
 [maven-badge]: https://maven-badges.herokuapp.com/maven-central/com.alejandrohdezma/sbt-fix/badge.svg?kill_cache=1
