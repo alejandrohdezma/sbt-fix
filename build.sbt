@@ -18,7 +18,6 @@ lazy val `sbt-fix` = project
   .enablePlugins(SbtPlugin)
   .settings(addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.11"))
   .settings(addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.3.1"))
-  .settings(libraryDependencies += "org.scalaj" %% "scalaj-http" % "2.4.2")
 
 lazy val `sbt-fix-it` = project
   .settings(description := "Enables scalafix/scalafmt settings in it configuration")
