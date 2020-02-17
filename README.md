@@ -2,6 +2,17 @@
 
 [![][github-action-badge]][github-action] [![][maven-badge]][maven] [![][steward-badge]][steward]  [![][mergify-badge]][mergify]
 
+---
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Download scalafix/scalafmt configuration from the cloud](#download-scalafixscalafmt-configuration-from-the-cloud)
+    - [Edit configuration location](#edit-configuration-location)
+    - [Adding extra configurations](#adding-extra-configurations)
+  - [Running scalafix in all configurations](#running-scalafix-in-all-configurations)
+  - [Running both scalafix & scalafmt in a single command](#running-both-scalafix--scalafmt-in-a-single-command)
+- [Integration tests](#integration-tests)
+
 ## Installation
 
 Add the following line to your `plugins.sbt` file:
