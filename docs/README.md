@@ -2,6 +2,9 @@
 
 [![][github-action-badge]][github-action] [![][maven-badge]][maven] [![][steward-badge]][steward]  [![][mergify-badge]][mergify]
 
+```scala mdoc:toc
+```
+
 ## Installation
 
 Add the following line to your `plugins.sbt` file:
