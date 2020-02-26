@@ -18,7 +18,7 @@
 Add the following line to your `plugins.sbt` file:
 
 ```sbt
-addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.3.0")
+addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.3.1")
 ```
 
 ## Usage
@@ -98,7 +98,7 @@ Which can be used in CI to check formatting easily.
 If you normally use the configuration for integration tests that SBT provides you can use `sbt-fix-it` (instead of `sbt-fix`). Add the following line to your `plugins.sbt` file:
 
 ```sbt
-addSbtPlugin("com.alejandrohdezma" %% "sbt-fix-it" % "0.3.0")
+addSbtPlugin("com.alejandrohdezma" %% "sbt-fix-it" % "0.3.1")
 ```
 
 This plugin contains all the extras and settings of the `sbt-fix` as well as automatically activating the `IntegrationTest` configuration and its default settings (as described in the [SBT documentation](https://www.scala-sbt.org/1.x/docs/Testing.html#Integration+Tests)) and adds the [scalafix](https://scalacenter.github.io/scalafix/docs/users/installation.html#integration-tests) and [scalafmt](https://scalameta.org/scalafmt/docs/installation.html#enable-integrationtest) settings for this configuration.
