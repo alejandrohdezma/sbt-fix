@@ -46,7 +46,7 @@ object FixCommandPlugin extends AutoPlugin {
         .map(c => s"$c:scalafix --check")
         .mkString("; ")
 
-      Command.process(s"all scalafmtAll scalafmtSbt; $scalafixCommand", state)
+      Command.process(s"all scalafmtCheckAll scalafmtSbtCheck; $scalafixCommand", state)
     case (state, Nil) =>
       val scalafixCommand = configsWithScalafix(state)
         .map(c => s"$c:scalafix")
