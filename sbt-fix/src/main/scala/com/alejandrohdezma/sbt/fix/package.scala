@@ -16,6 +16,8 @@
 
 package com.alejandrohdezma.sbt
 
+import java.net.UnknownHostException
+
 import sbt._
 import sbt.io.IO
 
@@ -55,15 +57,20 @@ package object fix {
     lazy val download     = log(s"Downloading $to from $from ...") → IO.write(to, remoteContent)
     lazy val includeExtra = log(s"Appending $including ...")       → IO.append(to, s"\n\n$extraContent")
 
-    lazy val isUpdated          = !localContent.contentEquals(remoteContent)
-    lazy val isUpdatedWithExtra = !localContent.contentEquals(s"$remoteContent\n\n$extraContent")
+    lazy val isNotUpdated =
+      if (including.exists) !localContent.contentEquals(s"$remoteContent\n\n$extraContent")
+      else !localContent.contentEquals(remoteContent)
 
-    (to.exists(), including.exists()) match {
-      case (false, true)                      => download → includeExtra
-      case (false, false)                     => download
-      case (true, false) if isUpdated         => download
-      case (true, true) if isUpdatedWithExtra => download → includeExtra
-      case (_, _)                             => ()
+    try {
+      (to.exists, including.exists) match {
+        case (false, true)                 => download → includeExtra
+        case (false, false)                => download
+        case (true, false) if isNotUpdated => download
+        case (true, true) if isNotUpdated  => download → includeExtra
+        case (_, _)                        => ()
+      }
+    } catch {
+      case _: UnknownHostException => ()
     }
 
     to
