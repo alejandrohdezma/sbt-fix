@@ -81,7 +81,7 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
     )
   }
 
-  private lazy val scalafixDefaultRules: Seq[ModuleID] = Seq(
+  lazy val scalafixDefaultRules: Seq[ModuleID] = Seq(
     "com.github.vovapolu" %% "scaluzzi"         % "0.1.3",
     "com.nequissimus"     %% "sort-imports"     % "0.3.0",
     "com.eed3si9n.fix"    %% "scalafix-noinfer" % "0.1.0-M1"
