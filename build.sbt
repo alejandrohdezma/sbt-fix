@@ -1,6 +1,13 @@
 ThisBuild / scalaVersion := "2.12.10"
 ThisBuild / organization := "com.alejandrohdezma"
 
+/**
+ * Although the plugin already adds these dependencies,
+ * this way we ensure that we get notified when a new version
+ * for them gets published.
+ */
+ThisBuild / scalafixDependencies := ScalafixWithDefaultsPlugin.scalafixDefaultRules
+
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
 addCommandAlias("ci-test", "fix --check; mdoc")
@@ -20,6 +27,6 @@ lazy val `sbt-fix` = project
   .settings(addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.3.1"))
 
 lazy val `sbt-fix-it` = project
-  .settings(description := "Enables scalafix/scalafmt settings in it configuration")
-  .enablePlugins(SbtPlugin)
   .dependsOn(`sbt-fix`)
+  .enablePlugins(SbtPlugin)
+  .settings(description := "Enables scalafix/scalafmt settings in it configuration")
