@@ -13,7 +13,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 addCommandAlias("ci-test", "fix --check; mdoc")
 addCommandAlias("ci-docs", "mdoc; headerCreateAll")
 
-lazy val root = project
+lazy val `sbt-fix-root` = project
   .in(file("."))
   .enablePlugins(MdocPlugin)
   .aggregate(`sbt-fix`, `sbt-fix-it`)
