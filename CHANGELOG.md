@@ -1,5 +1,23 @@
 # Changelog
 
+## [v0.4.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.4.0) (2020-02-28)
+
+[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.3.1...v0.4.0)
+
+**Implemented enhancements:**
+
+- Support a pretty simple offline mode [\#42](https://github.com/alejandrohdezma/sbt-fix/pull/42) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Ensure we get notified of new scalafix rules versions by scala-steward [\#40](https://github.com/alejandrohdezma/sbt-fix/pull/40) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
+**Fixed bugs:**
+
+- `fix --check` should call check scalafmt commands [\#39](https://github.com/alejandrohdezma/sbt-fix/pull/39) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
+**Merged pull requests:**
+
+- First run scalafix, then scalafmt [\#44](https://github.com/alejandrohdezma/sbt-fix/pull/44) ([sideeffffect](https://github.com/sideeffffect))
+- Update sort-imports to 0.3.2 [\#41](https://github.com/alejandrohdezma/sbt-fix/pull/41) ([scala-steward](https://github.com/scala-steward))
+
 ## [v0.3.1](https://github.com/alejandrohdezma/sbt-fix/tree/v0.3.1) (2020-02-26)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.3.0...v0.3.1)
