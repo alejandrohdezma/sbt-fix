@@ -52,7 +52,7 @@ object FixCommandPlugin extends AutoPlugin {
         .map(c => s"$c:scalafix")
         .mkString(" ")
 
-      Command.process(s"all scalafmtAll scalafmtSbt; all $scalafixCommand", state)
+      Command.process(s"all $scalafixCommand; all scalafmtAll scalafmtSbt", state)
     case (state, args) =>
       state.log.error(s"Invalid argument `${args.mkString(" ")}`")
       state.log.error(s"The only argument allowed is `--check`")
