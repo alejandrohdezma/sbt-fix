@@ -15,3 +15,4 @@ The maintainers of the project are:
 These are the people that have contributed to the _sbt-fix_ project:
 
 - [![alejandrohdezma](https://avatars0.githubusercontent.com/u/9027541?v=4&s=20) **alejandrohdezma**](https://github.com/alejandrohdezma)
+- [![sideeffffect](https://avatars0.githubusercontent.com/u/9019485?v=4&s=20) **sideeffffect**](https://github.com/sideeffffect)
