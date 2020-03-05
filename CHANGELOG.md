@@ -1,19 +1,12 @@
 # Changelog
 
-## [Unreleased](https://github.com/alejandrohdezma/sbt-fix/tree/HEAD)
-
-[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.4.0...HEAD)
-
-**Merged pull requests:**
-
-- Update scaluzzi to 0.1.4.1 [\#53](https://github.com/alejandrohdezma/sbt-fix/pull/53) ([scala-steward](https://github.com/scala-steward))
-
 ## [v0.4.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.4.0) (2020-02-28)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.3.1...v0.4.0)
 
 🚀 **Features**
 
+- First run scalafix, then scalafmt [\#44](https://github.com/alejandrohdezma/sbt-fix/pull/44) ([sideeffffect](https://github.com/sideeffffect))
 - Support a pretty simple offline mode [\#42](https://github.com/alejandrohdezma/sbt-fix/pull/42) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Ensure we get notified of new scalafix rules versions by scala-steward [\#40](https://github.com/alejandrohdezma/sbt-fix/pull/40) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
@@ -21,26 +14,15 @@
 
 - `fix --check` should call check scalafmt commands [\#39](https://github.com/alejandrohdezma/sbt-fix/pull/39) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
-**Merged pull requests:**
-
-- First run scalafix, then scalafmt [\#44](https://github.com/alejandrohdezma/sbt-fix/pull/44) ([sideeffffect](https://github.com/sideeffffect))
-- Update sort-imports to 0.3.2 [\#41](https://github.com/alejandrohdezma/sbt-fix/pull/41) ([scala-steward](https://github.com/scala-steward))
-
 ## [v0.3.1](https://github.com/alejandrohdezma/sbt-fix/tree/v0.3.1) (2020-02-26)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.3.0...v0.3.1)
-
-**Merged pull requests:**
-
-- Update sbt-tpolecat to 0.1.11 [\#36](https://github.com/alejandrohdezma/sbt-fix/pull/36) ([scala-steward](https://github.com/scala-steward))
-- Update sbt-mdoc-toc to 0.2 [\#35](https://github.com/alejandrohdezma/sbt-fix/pull/35) ([scala-steward](https://github.com/scala-steward))
-- Update sbt-github-header, sbt-github-mdoc to 0.5.2 [\#32](https://github.com/alejandrohdezma/sbt-fix/pull/32) ([scala-steward](https://github.com/scala-steward))
 
 ## [v0.3.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.3.0) (2020-02-15)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.2.6...v0.3.0)
 
-**Merged pull requests:**
+🚀 **Features**
 
 - Remove dependency on `scalaj-http` [\#28](https://github.com/alejandrohdezma/sbt-fix/pull/28) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
