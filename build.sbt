@@ -26,7 +26,7 @@ lazy val docs = project
 
 lazy val `sbt-fix` = project
   .enablePlugins(SbtPlugin)
-  .settings(addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.11"))
+  .settings(addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.12"))
   .settings(addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.3.2"))
 
 lazy val `sbt-fix-it` = project
