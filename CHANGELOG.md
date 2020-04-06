@@ -1,5 +1,19 @@
 # Changelog
 
+## [Unreleased](https://github.com/alejandrohdezma/sbt-fix/tree/HEAD)
+
+[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.4.0...HEAD)
+
+📈 **Dependency updates**
+
+- Update sbt to 1.3.9 [\#65](https://github.com/alejandrohdezma/sbt-fix/pull/65) ([scala-steward](https://github.com/scala-steward))
+- Update scaluzzi to 0.1.5 [\#64](https://github.com/alejandrohdezma/sbt-fix/pull/64) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafix to 0.9.12 [\#63](https://github.com/alejandrohdezma/sbt-fix/pull/63) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.1.3 [\#62](https://github.com/alejandrohdezma/sbt-fix/pull/62) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafmt to 2.3.2 [\#60](https://github.com/alejandrohdezma/sbt-fix/pull/60) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-github-header, sbt-github-mdoc to 0.6.0 [\#57](https://github.com/alejandrohdezma/sbt-fix/pull/57) ([scala-steward](https://github.com/scala-steward))
+- Update scaluzzi to 0.1.4.1 [\#53](https://github.com/alejandrohdezma/sbt-fix/pull/53) ([scala-steward](https://github.com/scala-steward))
+
 ## [v0.4.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.4.0) (2020-02-28)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.3.1...v0.4.0)
@@ -14,9 +28,19 @@
 
 - `fix --check` should call check scalafmt commands [\#39](https://github.com/alejandrohdezma/sbt-fix/pull/39) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
+📈 **Dependency updates**
+
+- Update sort-imports to 0.3.2 [\#41](https://github.com/alejandrohdezma/sbt-fix/pull/41) ([scala-steward](https://github.com/scala-steward))
+
 ## [v0.3.1](https://github.com/alejandrohdezma/sbt-fix/tree/v0.3.1) (2020-02-26)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.3.0...v0.3.1)
+
+📈 **Dependency updates**
+
+- Update sbt-tpolecat to 0.1.11 [\#36](https://github.com/alejandrohdezma/sbt-fix/pull/36) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc-toc to 0.2 [\#35](https://github.com/alejandrohdezma/sbt-fix/pull/35) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-github-header, sbt-github-mdoc to 0.5.2 [\#32](https://github.com/alejandrohdezma/sbt-fix/pull/32) ([scala-steward](https://github.com/scala-steward))
 
 ## [v0.3.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.3.0) (2020-02-15)
 
@@ -26,13 +50,40 @@
 
 - Remove dependency on `scalaj-http` [\#28](https://github.com/alejandrohdezma/sbt-fix/pull/28) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
+📈 **Dependency updates**
+
+- Update sbt-ci-release to 1.5.2 [\#25](https://github.com/alejandrohdezma/sbt-fix/pull/25) ([scala-steward](https://github.com/scala-steward))
+- Update sbt to 1.3.8 [\#19](https://github.com/alejandrohdezma/sbt-fix/pull/19) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafmt to 2.3.1 [\#18](https://github.com/alejandrohdezma/sbt-fix/pull/18) ([scala-steward](https://github.com/scala-steward))
+- Update sbt to 1.3.7 [\#17](https://github.com/alejandrohdezma/sbt-fix/pull/17) ([scala-steward](https://github.com/scala-steward))
+
 ## [v0.2.6](https://github.com/alejandrohdezma/sbt-fix/tree/v0.2.6) (2020-01-07)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.2.5...v0.2.6)
 
+📈 **Dependency updates**
+
+- Update sbt-mdoc to 2.1.1 [\#16](https://github.com/alejandrohdezma/sbt-fix/pull/16) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-ci-release to 1.5.0 [\#15](https://github.com/alejandrohdezma/sbt-fix/pull/15) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.1.0 [\#14](https://github.com/alejandrohdezma/sbt-fix/pull/14) ([scala-steward](https://github.com/scala-steward))
+- Update sbt to 1.3.6 [\#13](https://github.com/alejandrohdezma/sbt-fix/pull/13) ([scala-steward](https://github.com/scala-steward))
+- Update sbt to 1.3.5 [\#12](https://github.com/alejandrohdezma/sbt-fix/pull/12) ([scala-steward](https://github.com/scala-steward))
+
 ## [v0.2.5](https://github.com/alejandrohdezma/sbt-fix/tree/v0.2.5) (2019-12-11)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.2.4...v0.2.5)
+
+📈 **Dependency updates**
+
+- Update sbt-scalafmt to 2.3.0 [\#11](https://github.com/alejandrohdezma/sbt-fix/pull/11) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.0.3 [\#10](https://github.com/alejandrohdezma/sbt-fix/pull/10) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafix to 0.9.11 [\#9](https://github.com/alejandrohdezma/sbt-fix/pull/9) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-tpolecat to 0.1.10 [\#8](https://github.com/alejandrohdezma/sbt-fix/pull/8) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-tpolecat to 0.1.9 [\#7](https://github.com/alejandrohdezma/sbt-fix/pull/7) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafix to 0.9.9 [\#6](https://github.com/alejandrohdezma/sbt-fix/pull/6) ([scala-steward](https://github.com/scala-steward))
+- Update sbt to 1.3.4 [\#5](https://github.com/alejandrohdezma/sbt-fix/pull/5) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.0.2 [\#4](https://github.com/alejandrohdezma/sbt-fix/pull/4) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.0.1 [\#3](https://github.com/alejandrohdezma/sbt-fix/pull/3) ([scala-steward](https://github.com/scala-steward))
 
 ## [v0.2.4](https://github.com/alejandrohdezma/sbt-fix/tree/v0.2.4) (2019-11-06)
 
@@ -50,9 +101,17 @@
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.2.0...v0.2.1)
 
+📈 **Dependency updates**
+
+- Update sbt-scalafix to 0.9.8 [\#2](https://github.com/alejandrohdezma/sbt-fix/pull/2) ([scala-steward](https://github.com/scala-steward))
+
 ## [v0.2.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.2.0) (2019-10-30)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.1.1...v0.2.0)
+
+📈 **Dependency updates**
+
+- Update sbt-me to 0.2.0 [\#1](https://github.com/alejandrohdezma/sbt-fix/pull/1) ([scala-steward](https://github.com/scala-steward))
 
 ## [v0.1.1](https://github.com/alejandrohdezma/sbt-fix/tree/v0.1.1) (2019-10-25)
 
