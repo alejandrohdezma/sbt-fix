@@ -77,7 +77,7 @@
 
 - Update sbt-scalafmt to 2.3.0 [\#11](https://github.com/alejandrohdezma/sbt-fix/pull/11) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-mdoc to 2.0.3 [\#10](https://github.com/alejandrohdezma/sbt-fix/pull/10) ([scala-steward](https://github.com/scala-steward))
-- Update sbt-scalafix to 0.9.11 [\#9](https://github.com/alejandrohdezma/sbt-fix/pull/9) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafix to 0.9.13 [\#9](https://github.com/alejandrohdezma/sbt-fix/pull/9) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-tpolecat to 0.1.10 [\#8](https://github.com/alejandrohdezma/sbt-fix/pull/8) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-tpolecat to 0.1.9 [\#7](https://github.com/alejandrohdezma/sbt-fix/pull/7) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-scalafix to 0.9.9 [\#6](https://github.com/alejandrohdezma/sbt-fix/pull/6) ([scala-steward](https://github.com/scala-steward))
