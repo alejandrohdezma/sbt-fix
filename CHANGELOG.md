@@ -6,6 +6,8 @@
 
 📈 **Dependency updates**
 
+- Update sbt-mdoc to 2.1.5 [\#70](https://github.com/alejandrohdezma/sbt-fix/pull/70) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafix to 0.9.13 [\#69](https://github.com/alejandrohdezma/sbt-fix/pull/69) ([scala-steward](https://github.com/scala-steward))
 - Update sbt to 1.3.9 [\#65](https://github.com/alejandrohdezma/sbt-fix/pull/65) ([scala-steward](https://github.com/scala-steward))
 - Update scaluzzi to 0.1.5 [\#64](https://github.com/alejandrohdezma/sbt-fix/pull/64) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-scalafix to 0.9.12 [\#63](https://github.com/alejandrohdezma/sbt-fix/pull/63) ([scala-steward](https://github.com/scala-steward))
@@ -63,7 +65,7 @@
 
 📈 **Dependency updates**
 
-- Update sbt-mdoc to 2.1.5 [\#16](https://github.com/alejandrohdezma/sbt-fix/pull/16) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.1.1 [\#16](https://github.com/alejandrohdezma/sbt-fix/pull/16) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-ci-release to 1.5.0 [\#15](https://github.com/alejandrohdezma/sbt-fix/pull/15) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-mdoc to 2.1.0 [\#14](https://github.com/alejandrohdezma/sbt-fix/pull/14) ([scala-steward](https://github.com/scala-steward))
 - Update sbt to 1.3.6 [\#13](https://github.com/alejandrohdezma/sbt-fix/pull/13) ([scala-steward](https://github.com/scala-steward))
@@ -77,7 +79,7 @@
 
 - Update sbt-scalafmt to 2.3.0 [\#11](https://github.com/alejandrohdezma/sbt-fix/pull/11) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-mdoc to 2.0.3 [\#10](https://github.com/alejandrohdezma/sbt-fix/pull/10) ([scala-steward](https://github.com/scala-steward))
-- Update sbt-scalafix to 0.9.13 [\#9](https://github.com/alejandrohdezma/sbt-fix/pull/9) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-scalafix to 0.9.11 [\#9](https://github.com/alejandrohdezma/sbt-fix/pull/9) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-tpolecat to 0.1.10 [\#8](https://github.com/alejandrohdezma/sbt-fix/pull/8) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-tpolecat to 0.1.9 [\#7](https://github.com/alejandrohdezma/sbt-fix/pull/7) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-scalafix to 0.9.9 [\#6](https://github.com/alejandrohdezma/sbt-fix/pull/6) ([scala-steward](https://github.com/scala-steward))
