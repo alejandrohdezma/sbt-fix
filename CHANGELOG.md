@@ -42,7 +42,7 @@
 
 - Update sbt-tpolecat to 0.1.11 [\#36](https://github.com/alejandrohdezma/sbt-fix/pull/36) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-mdoc-toc to 0.2 [\#35](https://github.com/alejandrohdezma/sbt-fix/pull/35) ([scala-steward](https://github.com/scala-steward))
-- Update sbt-github-header, sbt-github-mdoc to 0.5.2 [\#32](https://github.com/alejandrohdezma/sbt-fix/pull/32) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-github-header, sbt-github-mdoc to 0.7.0 [\#32](https://github.com/alejandrohdezma/sbt-fix/pull/32) ([scala-steward](https://github.com/scala-steward))
 
 ## [v0.3.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.3.0) (2020-02-15)
 
