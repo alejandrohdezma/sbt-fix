@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.4.0...HEAD)
 
+🚀 **Features**
+
+- Add `sbt-remove-test-from-pom` plugin [\#74](https://github.com/alejandrohdezma/sbt-fix/pull/74) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
 📈 **Dependency updates**
 
 - Update sbt-github-header, sbt-github-mdoc to 0.7.0 [\#72](https://github.com/alejandrohdezma/sbt-fix/pull/72) ([scala-steward](https://github.com/scala-steward))
