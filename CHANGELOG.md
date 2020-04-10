@@ -10,6 +10,7 @@
 
 📈 **Dependency updates**
 
+- Update sbt-header to 5.5.0 [\#76](https://github.com/alejandrohdezma/sbt-fix/pull/76) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-github-header, sbt-github-mdoc to 0.7.0 [\#72](https://github.com/alejandrohdezma/sbt-fix/pull/72) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-mdoc to 2.1.5 [\#70](https://github.com/alejandrohdezma/sbt-fix/pull/70) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-scalafix to 0.9.13 [\#69](https://github.com/alejandrohdezma/sbt-fix/pull/69) ([scala-steward](https://github.com/scala-steward))
