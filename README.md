@@ -27,11 +27,11 @@ All included plugins are automatically activated, so you don't have to do anythi
 
 ### Download scalafix/scalafmt configuration from the cloud
 
-One of the main reasons of this plugin is to keep scalafix/scalafmt configurations synchronized across projects. To do so, both configurations are automatically downloaded from a remote location. By default both configurations are downloaded from [alejandrohdezma/sbt-fix-defaults](https://github.com/alejandrohdezma/sbt-fix-defaults).
+One of the main reasons of this plugin is to keep scalafix/scalafmt configurations synchronized across projects. To do so, both configurations are automatically downloaded from a remote location.
 
 #### Edit configuration location
 
-To download configurations from a different location, edit `scalafixConfigLocation` and `scalafmtConfigLocation` to a valid url:
+Edit `scalafixConfigLocation` and `scalafmtConfigLocation` to a valid url:
 
 ```sbt
 scalafixConfigLocation := "your-url"
