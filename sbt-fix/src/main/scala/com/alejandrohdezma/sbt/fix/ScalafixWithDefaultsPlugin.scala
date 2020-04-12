@@ -17,7 +17,7 @@
 package com.alejandrohdezma.sbt.fix
 
 import sbt.Keys._
-import sbt.{Command, Def, addCompilerPlugin, _}
+import sbt._
 
 import scalafix.sbt.ScalafixPlugin
 import scalafix.sbt.ScalafixPlugin.autoImport._
@@ -36,7 +36,7 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   object autoImport {
 
     lazy val scalafixConfigLocation: SettingKey[String] = settingKey[String] {
-      s"Location of the remote scalafix config. Defaults to ${Defaults.scalafix}"
+      s"Location of the remote scalafix config"
     }
 
     lazy val scalafixExtraConfig: SettingKey[File] = settingKey[File] {
@@ -55,7 +55,6 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   override def buildSettings: Seq[Setting[_]] = Seq(
     scalafixExtraConfig               := file(".scalafix-extra.conf"),
     scalafixConfig                    := scalafixDownloadConfig.value,
-    scalafixConfigLocation            := Defaults.scalafix,
     scalacOptions                     += "-P:semanticdb:synthetics:on",
     scalafixDependencies in ThisBuild ++= scalafixDefaultRules,
     addCompilerPlugin(scalafixSemanticdb)
