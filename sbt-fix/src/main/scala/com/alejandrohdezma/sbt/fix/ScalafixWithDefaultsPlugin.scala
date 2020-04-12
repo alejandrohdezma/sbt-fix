@@ -35,7 +35,7 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
 
-    lazy val scalafixConfigLocation: SettingKey[String] = settingKey[String] {
+    lazy val scalafixConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafix config"
     }
 

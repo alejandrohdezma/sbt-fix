@@ -44,7 +44,7 @@ package object fix {
    * @return the new local file
    */
   @SuppressWarnings(Array("scalafix:Disable.exists"))
-  def copyRemoteFile(log: (=> String) => Unit)(from: String, to: File, including: File): File = {
+  def copyRemoteFile(log: (=> String) => Unit)(from: URL, to: File, including: File): File = {
     val header =
       s"""# This file has been automatically generated and should 
          |# not be edited nor added to source control systems.

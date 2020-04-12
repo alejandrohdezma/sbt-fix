@@ -21,14 +21,12 @@ import java.util.concurrent.ConcurrentHashMap
 
 import scala.io.Source
 
+@SuppressWarnings(Array("all"))
 object client {
 
   /** Calls the provided URL and returns its contents as `String` */
-  @SuppressWarnings(Array("all"))
-  def get(uri: String): String = cache.computeIfAbsent(
-    uri, { _ =>
-      val url = new URL(uri)
-
+  def get(url: URL): String = cache.computeIfAbsent(
+    url, { _ =>
       val connection = url.openConnection.asInstanceOf[HttpURLConnection]
 
       connection.setInstanceFollowRedirects(true)
@@ -39,6 +37,6 @@ object client {
     }
   )
 
-  private val cache: ConcurrentHashMap[String, String] = new ConcurrentHashMap[String, String]()
+  private val cache: ConcurrentHashMap[URL, String] = new ConcurrentHashMap[URL, String]()
 
 }

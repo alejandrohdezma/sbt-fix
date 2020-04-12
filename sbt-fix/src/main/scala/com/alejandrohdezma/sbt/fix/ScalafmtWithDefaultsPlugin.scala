@@ -30,7 +30,7 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
 
-    lazy val scalafmtConfigLocation: SettingKey[String] = settingKey[String] {
+    lazy val scalafmtConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafmt config"
     }
 
