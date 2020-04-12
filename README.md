@@ -50,8 +50,6 @@ For example, for adding a new scalafix rule:
 rules += MyNewRule
 ```
 
-> The location of this files can be altered by using the `scalafixExtraConfig` and `scalafmtExtraConfig` settings.
-
 ### Running scalafix in all configurations
 
 Enabling this plugin also adds a few interesting commands that aren't available in the original plugins. For example, executing the `scalafix` task in all the available configurations. This can be done by executing the `scalafixAll` command:
