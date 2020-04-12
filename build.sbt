@@ -1,12 +1,11 @@
 ThisBuild / scalaVersion := "2.12.10"
 ThisBuild / organization := "com.alejandrohdezma"
 
-/**
- * Although the plugin already adds these dependencies,
- * this way we ensure that we get notified when a new version
- * for them gets published.
- */
-ThisBuild / scalafixDependencies := ScalafixWithDefaultsPlugin.scalafixDefaultRules
+ThisBuild / scalafixDependencies ++= Seq(
+  "com.github.vovapolu" %% "scaluzzi"         % "0.1.5",
+  "com.nequissimus"     %% "sort-imports"     % "0.3.2",
+  "com.eed3si9n.fix"    %% "scalafix-noinfer" % "0.1.0-M1"
+)
 
 ThisBuild / scalafixConfigLocation := url {
   "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafix.conf"

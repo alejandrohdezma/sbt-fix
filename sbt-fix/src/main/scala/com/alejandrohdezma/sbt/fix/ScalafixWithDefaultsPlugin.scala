@@ -53,7 +53,6 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
     SettingKey[Unit]("generateScalafixConfig") := generateConfig.value,
     scalafixConfig                             := Some(config),
     scalacOptions                              += "-P:semanticdb:synthetics:on",
-    scalafixDependencies in ThisBuild          ++= scalafixDefaultRules,
     addCompilerPlugin(scalafixSemanticdb)
   )
 
@@ -80,11 +79,5 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
 
     ()
   }
-
-  lazy val scalafixDefaultRules: Seq[ModuleID] = Seq(
-    "com.github.vovapolu" %% "scaluzzi"         % "0.1.5",
-    "com.nequissimus"     %% "sort-imports"     % "0.3.2",
-    "com.eed3si9n.fix"    %% "scalafix-noinfer" % "0.1.0-M1"
-  )
 
 }
