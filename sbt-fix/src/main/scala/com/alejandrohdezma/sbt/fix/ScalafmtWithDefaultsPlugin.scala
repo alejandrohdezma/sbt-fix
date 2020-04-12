@@ -16,8 +16,10 @@
 
 package com.alejandrohdezma.sbt.fix
 
-import sbt.Keys.sLog
-import sbt._
+import scala.sys.process.Process._
+import scala.sys.process._
+
+import sbt.{Def, _}
 
 import org.scalafmt.sbt.ScalafmtPlugin
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport._
@@ -29,6 +31,10 @@ import org.scalafmt.sbt.ScalafmtPlugin.autoImport._
 object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
+
+    lazy val generateScalafmtConfig: SettingKey[Unit] = settingKey[Unit] {
+      "Generates scalafmt aggregated config"
+    }
 
     lazy val scalafmtConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafmt config"
@@ -49,16 +55,20 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   override def buildSettings: Seq[Setting[_]] =
     Seq(
-      scalafmtExtraConfig := file(".scalafmt-extra.conf"),
-      scalafmtConfig      := scalafmtDownloadConfig.value
+      generateScalafmtConfig := generateConfig.value,
+      scalafmtExtraConfig    := file(".scalafmt-extra.conf"),
+      scalafmtConfig         := file(".scalafmt.conf")
     )
 
-  private lazy val scalafmtDownloadConfig: Def.Initialize[Task[File]] = Def.task {
-    copyRemoteFile(sLog.value.info)(
-      from = scalafmtConfigLocation.value,
-      to = scalafmtConfig.value,
-      including = scalafmtExtraConfig.value
-    )
+  @SuppressWarnings(Array("scalafix:Disable.exists"))
+  private lazy val generateConfig: Def.Initialize[Unit] = Def.setting {
+    val including = scalafmtExtraConfig.value
+    val remote    = scalafmtConfigLocation.value
+
+    if (including.exists) (cat(remote, including) #> file(".scalafmt.conf")).!
+    else (remote #> file(".scalafmt.conf")).!
+
+    ()
   }
 
 }

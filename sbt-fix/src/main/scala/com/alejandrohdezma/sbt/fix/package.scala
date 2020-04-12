@@ -16,10 +16,7 @@
 
 package com.alejandrohdezma.sbt
 
-import java.net.UnknownHostException
-
 import sbt._
-import sbt.io.IO
 
 package object fix {
 
@@ -44,35 +41,12 @@ package object fix {
    * @return the new local file
    */
   @SuppressWarnings(Array("scalafix:Disable.exists"))
-  def copyRemoteFile(log: (=> String) => Unit)(from: URL, to: File, including: File): File = {
-    val header =
-      s"""# This file has been automatically generated and should 
-         |# not be edited nor added to source control systems.
-         |# Extra configurations can be added to ${including.name}""".stripMargin
+  def copyRemoteFile(from: URL, to: File, including: File): File = {
+    import scala.sys.process.Process._
+    import scala.sys.process._
 
-    lazy val localContent  = IO.read(to)
-    lazy val extraContent  = IO.read(including)
-    lazy val remoteContent = header + "\n\n" + http.client.get(from)
-
-    lazy val download     = log(s"Downloading $to from $from ...") → IO.write(to, remoteContent)
-    lazy val includeExtra = log(s"Appending $including ...")       → IO.append(to, s"\n\n$extraContent")
-
-    lazy val isNotUpdated =
-      if (including.exists) !localContent.contentEquals(s"$remoteContent\n\n$extraContent")
-      else !localContent.contentEquals(remoteContent)
-
-    try {
-      (to.exists, including.exists) match {
-        case (false, true)                 => download → includeExtra
-        case (false, false)                => download
-        case (true, false) if isNotUpdated => download
-        case (true, true) if isNotUpdated  => download → includeExtra
-        case (_, _)                        => ()
-      }
-    } catch {
-      case _: UnknownHostException => ()
-    }
-
+    if (including.exists) (cat(from, including) #> to).!
+    else (from #> to).!
     to
   }
 

@@ -16,6 +16,9 @@
 
 package com.alejandrohdezma.sbt.fix
 
+import scala.sys.process.Process._
+import scala.sys.process._
+
 import sbt.Keys._
 import sbt._
 
@@ -35,6 +38,10 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
 
+    lazy val generateScalafixConfig: SettingKey[Unit] = settingKey[Unit] {
+      "Generates scalafix aggregated config"
+    }
+
     lazy val scalafixConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafix config"
     }
@@ -53,8 +60,9 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   override def requires: Plugins = ScalafixPlugin
 
   override def buildSettings: Seq[Setting[_]] = Seq(
+    generateScalafixConfig            := generateConfig.value,
     scalafixExtraConfig               := file(".scalafix-extra.conf"),
-    scalafixConfig                    := scalafixDownloadConfig.value,
+    scalafixConfig                    := Some(file(".scalafix.conf")),
     scalacOptions                     += "-P:semanticdb:synthetics:on",
     scalafixDependencies in ThisBuild ++= scalafixDefaultRules,
     addCompilerPlugin(scalafixSemanticdb)
@@ -70,14 +78,15 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
     Command.process(command, state)
   }
 
-  private lazy val scalafixDownloadConfig = Def.setting {
-    Some(
-      copyRemoteFile(sLog.value.info)(
-        from = scalafixConfigLocation.value,
-        to = scalafixConfig.value.getOrElse(file(".scalafix.conf")),
-        including = scalafixExtraConfig.value
-      )
-    )
+  @SuppressWarnings(Array("scalafix:Disable.exists"))
+  private lazy val generateConfig = Def.setting {
+    val including = scalafixExtraConfig.value
+    val remote    = scalafixConfigLocation.value
+
+    if (including.exists) (cat(remote, including) #> file(".scalafix.conf")).!
+    else (remote #> file(".scalafix.conf")).!
+
+    ()
   }
 
   lazy val scalafixDefaultRules: Seq[ModuleID] = Seq(
