@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.4.0...HEAD)
 
+⚠️ **Breaking changes**
+
+- Remove default values from `sbt-fix` [\#80](https://github.com/alejandrohdezma/sbt-fix/pull/80) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
 🚀 **Features**
 
 - Add `sbt-remove-test-from-pom` plugin [\#74](https://github.com/alejandrohdezma/sbt-fix/pull/74) ([alejandrohdezma](https://github.com/alejandrohdezma))
