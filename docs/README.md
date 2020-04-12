@@ -26,8 +26,8 @@ One of the main reasons of this plugin is to keep scalafix/scalafmt configuratio
 Edit `scalafixConfigLocation` and `scalafmtConfigLocation` to a valid url:
 
 ```sbt
-scalafixConfigLocation := "your-url"
-scalafmtConfigLocation := "your-url"
+scalafixConfigLocation := sbt.url("your-url")
+scalafmtConfigLocation := sbt.url("your-url")
 ```  
 
 #### Adding extra configurations

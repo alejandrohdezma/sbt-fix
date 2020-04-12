@@ -8,8 +8,12 @@ ThisBuild / organization := "com.alejandrohdezma"
  */
 ThisBuild / scalafixDependencies := ScalafixWithDefaultsPlugin.scalafixDefaultRules
 
-ThisBuild / scalafixConfigLocation := "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafix.conf"
-ThisBuild / scalafmtConfigLocation := "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafmt.conf"
+ThisBuild / scalafixConfigLocation := url {
+  "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafix.conf"
+}
+ThisBuild / scalafmtConfigLocation := url {
+  "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafmt.conf"
+}
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
