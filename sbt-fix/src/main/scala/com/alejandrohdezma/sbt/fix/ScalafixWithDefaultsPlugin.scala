@@ -16,7 +16,6 @@
 
 package com.alejandrohdezma.sbt.fix
 
-import scala.sys.process.Process._
 import scala.sys.process._
 
 import sbt.Keys._
@@ -38,17 +37,8 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
 
-    lazy val generateScalafixConfig: SettingKey[Unit] = settingKey[Unit] {
-      "Generates scalafix aggregated config"
-    }
-
     lazy val scalafixConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafix config"
-    }
-
-    lazy val scalafixExtraConfig: SettingKey[File] = settingKey[File] {
-      "Path to a scalafix configuration file to specify extra configurations to be appended to " +
-        "the downloaded ones. Defaults to a \".scalafix-extra.conf\" file in the base directory"
     }
 
   }
@@ -60,11 +50,10 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   override def requires: Plugins = ScalafixPlugin
 
   override def buildSettings: Seq[Setting[_]] = Seq(
-    generateScalafixConfig            := generateConfig.value,
-    scalafixExtraConfig               := file(".scalafix-extra.conf"),
-    scalafixConfig                    := Some(file(".scalafix.conf")),
-    scalacOptions                     += "-P:semanticdb:synthetics:on",
-    scalafixDependencies in ThisBuild ++= scalafixDefaultRules,
+    SettingKey[Unit]("generateScalafixConfig") := generateConfig.value,
+    scalafixConfig                             := Some(config),
+    scalacOptions                              += "-P:semanticdb:synthetics:on",
+    scalafixDependencies in ThisBuild          ++= scalafixDefaultRules,
     addCompilerPlugin(scalafixSemanticdb)
   )
 
@@ -78,13 +67,16 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
     Command.process(command, state)
   }
 
+  private val config = file(".scalafix.conf")
+
   @SuppressWarnings(Array("scalafix:Disable.exists"))
   private lazy val generateConfig = Def.setting {
-    val including = scalafixExtraConfig.value
+    val including = file(".scalafix-extra.conf")
     val remote    = scalafixConfigLocation.value
 
-    if (including.exists) (cat(remote, including) #> file(".scalafix.conf")).!
-    else (remote #> file(".scalafix.conf")).!
+    if (including.exists)
+      (remote #> config #&& (including #>> config)).!
+    else (remote #> config).!
 
     ()
   }

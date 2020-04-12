@@ -16,10 +16,9 @@
 
 package com.alejandrohdezma.sbt.fix
 
-import scala.sys.process.Process._
 import scala.sys.process._
 
-import sbt.{Def, _}
+import sbt._
 
 import org.scalafmt.sbt.ScalafmtPlugin
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport._
@@ -32,17 +31,8 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
 
-    lazy val generateScalafmtConfig: SettingKey[Unit] = settingKey[Unit] {
-      "Generates scalafmt aggregated config"
-    }
-
     lazy val scalafmtConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafmt config"
-    }
-
-    lazy val scalafmtExtraConfig: SettingKey[File] = settingKey[File] {
-      "Path to a scalafmt configuration file to specify extra configurations to be appended to " +
-        "the downloaded ones. Defaults to a \".scalafmt-extra.conf\" file in the base directory"
     }
 
   }
@@ -53,20 +43,20 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   override def requires: Plugins = ScalafmtPlugin
 
-  override def buildSettings: Seq[Setting[_]] =
-    Seq(
-      generateScalafmtConfig := generateConfig.value,
-      scalafmtExtraConfig    := file(".scalafmt-extra.conf"),
-      scalafmtConfig         := file(".scalafmt.conf")
-    )
+  override def buildSettings: Seq[Setting[_]] = Seq(
+    SettingKey[Unit]("generateScalafmtConfig") := generateConfig.value,
+    scalafmtConfig                             := config
+  )
+
+  private val config = file(".scalafmt.conf")
 
   @SuppressWarnings(Array("scalafix:Disable.exists"))
   private lazy val generateConfig: Def.Initialize[Unit] = Def.setting {
-    val including = scalafmtExtraConfig.value
+    val including = file(".scalafmt-extra.conf")
     val remote    = scalafmtConfigLocation.value
 
-    if (including.exists) (cat(remote, including) #> file(".scalafmt.conf")).!
-    else (remote #> file(".scalafmt.conf")).!
+    if (including.exists) (remote #> config #&& (including #>> config)).!
+    else (remote #> config).!
 
     ()
   }
