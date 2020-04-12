@@ -37,10 +37,6 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
 
-    lazy val generateScalafixConfig: SettingKey[Unit] = settingKey[Unit] {
-      "Generates scalafix aggregated config"
-    }
-
     lazy val scalafixConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafix config"
     }
@@ -54,10 +50,10 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   override def requires: Plugins = ScalafixPlugin
 
   override def buildSettings: Seq[Setting[_]] = Seq(
-    generateScalafixConfig            := generateConfig.value,
-    scalafixConfig                    := Some(config),
-    scalacOptions                     += "-P:semanticdb:synthetics:on",
-    scalafixDependencies in ThisBuild ++= scalafixDefaultRules,
+    SettingKey[Unit]("generateScalafixConfig") := generateConfig.value,
+    scalafixConfig                             := Some(config),
+    scalacOptions                              += "-P:semanticdb:synthetics:on",
+    scalafixDependencies in ThisBuild          ++= scalafixDefaultRules,
     addCompilerPlugin(scalafixSemanticdb)
   )
 

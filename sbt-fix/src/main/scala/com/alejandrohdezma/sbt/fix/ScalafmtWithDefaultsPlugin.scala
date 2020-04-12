@@ -31,10 +31,6 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   object autoImport {
 
-    lazy val generateScalafmtConfig: SettingKey[Unit] = settingKey[Unit] {
-      "Generates scalafmt aggregated config"
-    }
-
     lazy val scalafmtConfigLocation: SettingKey[URL] = settingKey[URL] {
       s"Location of the remote scalafmt config"
     }
@@ -47,11 +43,10 @@ object ScalafmtWithDefaultsPlugin extends AutoPlugin {
 
   override def requires: Plugins = ScalafmtPlugin
 
-  override def buildSettings: Seq[Setting[_]] =
-    Seq(
-      generateScalafmtConfig := generateConfig.value,
-      scalafmtConfig         := config
-    )
+  override def buildSettings: Seq[Setting[_]] = Seq(
+    SettingKey[Unit]("generateScalafmtConfig") := generateConfig.value,
+    scalafmtConfig                             := config
+  )
 
   private val config = file(".scalafmt.conf")
 
