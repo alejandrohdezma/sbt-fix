@@ -8,6 +8,10 @@
 
 - Add `sbt-remove-test-from-pom` plugin [\#74](https://github.com/alejandrohdezma/sbt-fix/pull/74) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
+📘 **Documentation**
+
+- Fix Github Actions badge [\#79](https://github.com/alejandrohdezma/sbt-fix/pull/79) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
 📈 **Dependency updates**
 
 - Update sbt-header to 5.5.0 [\#76](https://github.com/alejandrohdezma/sbt-fix/pull/76) ([scala-steward](https://github.com/scala-steward))
