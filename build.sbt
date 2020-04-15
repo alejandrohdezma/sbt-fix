@@ -13,7 +13,6 @@ ThisBuild / scalafixConfigLocation := url {
 ThisBuild / scalafmtConfigLocation := url {
   "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafmt.conf"
 }
-
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
 addCommandAlias("ci-test", "fix --check; docs/mdoc")
@@ -31,8 +30,3 @@ lazy val `sbt-fix` = project
   .enablePlugins(SbtPlugin)
   .settings(addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.12"))
   .settings(addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.3.2"))
-
-lazy val `sbt-fix-it` = project
-  .dependsOn(`sbt-fix`)
-  .enablePlugins(SbtPlugin)
-  .settings(description := "Enables scalafix/scalafmt settings in it configuration")
