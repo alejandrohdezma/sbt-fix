@@ -15,6 +15,7 @@
 
 🚀 **Features**
 
+- Enable calling `fix --check` using `fix -c` [\#105](https://github.com/alejandrohdezma/sbt-fix/pull/105) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Add `scalafixEnable` before calling `scalafix` on `fix --check` [\#103](https://github.com/alejandrohdezma/sbt-fix/pull/103) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Add `sbt-remove-test-from-pom` plugin [\#74](https://github.com/alejandrohdezma/sbt-fix/pull/74) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
@@ -110,7 +111,6 @@
 - Update sbt to 1.3.4 [\#5](https://github.com/alejandrohdezma/sbt-fix/pull/5) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-mdoc to 2.0.2 [\#4](https://github.com/alejandrohdezma/sbt-fix/pull/4) ([scala-steward](https://github.com/scala-steward))
 - Update sbt-mdoc to 2.0.1 [\#3](https://github.com/alejandrohdezma/sbt-fix/pull/3) ([scala-steward](https://github.com/scala-steward))
-- Update sbt-me to 0.2.0 [\#1](https://github.com/alejandrohdezma/sbt-fix/pull/1) ([scala-steward](https://github.com/scala-steward))
 
 ## [v0.2.4](https://github.com/alejandrohdezma/sbt-fix/tree/v0.2.4) (2019-11-06)
 
@@ -135,6 +135,10 @@
 ## [v0.2.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.2.0) (2019-10-30)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.1.1...v0.2.0)
+
+📈 **Dependency updates**
+
+- Update sbt-me to 0.2.0 [\#1](https://github.com/alejandrohdezma/sbt-fix/pull/1) ([scala-steward](https://github.com/scala-steward))
 
 ## [v0.1.1](https://github.com/alejandrohdezma/sbt-fix/tree/v0.1.1) (2019-10-25)
 
