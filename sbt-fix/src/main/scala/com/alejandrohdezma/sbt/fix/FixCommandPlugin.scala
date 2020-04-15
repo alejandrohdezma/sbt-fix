@@ -17,7 +17,7 @@
 package com.alejandrohdezma.sbt.fix
 
 import sbt.Keys._
-import sbt.{Command, Def, _}
+import sbt._
 
 import org.scalafmt.sbt.ScalafmtPlugin
 import scalafix.sbt.ScalafixPlugin
@@ -38,25 +38,25 @@ object FixCommandPlugin extends AutoPlugin {
 
   override def requires: Plugins = ScalafixPlugin && ScalafmtPlugin
 
-  override def projectSettings: Seq[Def.Setting[_]] = Seq(commands += fix)
+  override def projectSettings: Seq[Def.Setting[_]] = Seq {
+    commands += Command.args("fix", "--check") {
+      case (state, Seq("--check")) =>
+        val scalafixCommand = configsWithScalafix(state)
+          .map(c => s"$c:scalafix --check")
+          .mkString("; ")
 
-  private lazy val fix: Command = Command.args("fix", "--check") {
-    case (state, Seq("--check")) =>
-      val scalafixCommand = configsWithScalafix(state)
-        .map(c => s"$c:scalafix --check")
-        .mkString("; ")
+        Command.process(s"all scalafmtCheckAll scalafmtSbtCheck; $scalafixCommand", state)
+      case (state, Nil) =>
+        val scalafixCommand = configsWithScalafix(state)
+          .map(c => s"$c:scalafix")
+          .mkString(" ")
 
-      Command.process(s"all scalafmtCheckAll scalafmtSbtCheck; $scalafixCommand", state)
-    case (state, Nil) =>
-      val scalafixCommand = configsWithScalafix(state)
-        .map(c => s"$c:scalafix")
-        .mkString(" ")
-
-      Command.process(s"all $scalafixCommand; all scalafmtAll scalafmtSbt", state)
-    case (state, args) =>
-      state.log.error(s"Invalid argument `${args.mkString(" ")}`")
-      state.log.error(s"The only argument allowed is `--check`")
-      state.fail
+        Command.process(s"all $scalafixCommand; all scalafmtAll scalafmtSbt", state)
+      case (state, args) =>
+        state.log.error(s"Invalid argument `${args.mkString(" ")}`")
+        state.log.error(s"The only argument allowed is `--check`")
+        state.fail
+    }
   }
 
 }

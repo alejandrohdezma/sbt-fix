@@ -31,23 +31,4 @@ package object fix {
       .filter(_.key.label.contentEquals("scalafix"))
       .flatMap(_.scope.config.toOption.map(_.name).toList)
 
-  /**
-   *  Copies the content of a remote URL into the provided `to` file and includes the data
-   *  from the `including` file if one is found.
-   *
-   * @param from the URL from which to download the data
-   * @param to the file where data will be written
-   * @param including an extra file whose content should be appended to the downloaded ones
-   * @return the new local file
-   */
-  @SuppressWarnings(Array("scalafix:Disable.exists"))
-  def copyRemoteFile(from: URL, to: File, including: File): File = {
-    import scala.sys.process.Process._
-    import scala.sys.process._
-
-    if (including.exists) (cat(from, including) #> to).!
-    else (from #> to).!
-    to
-  }
-
 }
