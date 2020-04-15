@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/alejandrohdezma/sbt-fix/tree/HEAD)
+## [v0.5.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.5.0) (2020-04-15)
 
-[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.4.0...HEAD)
+[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.4.0...v0.5.0)
 
 ⚠️ **Breaking changes**
 
