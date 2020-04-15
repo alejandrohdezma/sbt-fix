@@ -2,6 +2,10 @@
 
 [![][github-action-badge]][github-action] [![][maven-badge]][maven] [![][steward-badge]][steward]  [![][mergify-badge]][mergify]
 
+> :exclamation: This project no longer enables synchronizing configuration across repositories. To enable that functionality, please check [alejandrohdezma/sbt-scalafix-defaults](https://github.com/alejandrohdezma/sbt-scalafix-defaults) and [alejandrohdezma/sbt-scalafmt-defaults](https://github.com/alejandrohdezma/sbt-scalafmt-defaults).
+>
+> If you want to provide your own organization's configuration you can use the previous repositories as templates and edit the `.scalafix.conf` and `.scalafmt.conf` at will.
+
 ```scala mdoc:toc
 ```
 
@@ -15,36 +19,11 @@ addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "@VERSION@")
 
 ## Usage
 
-All included plugins are automatically activated, so you don't have to do anything to start using them, however, some of them provide new features or improve existing ones.
-
-### Download scalafix/scalafmt configuration from the cloud
-
-One of the main reasons of this plugin is to keep scalafix/scalafmt configurations synchronized across projects. To do so, both configurations are automatically downloaded from a remote location.
-
-#### Edit configuration location
-
-Edit `scalafixConfigLocation` and `scalafmtConfigLocation` to a valid url:
-
-```sbt
-scalafixConfigLocation := sbt.url("your-url")
-scalafmtConfigLocation := sbt.url("your-url")
-```  
-
-#### Adding extra configurations
-
-Extra configurations can be added without needing to alter the original file, just by adding a `.scalafix-extra.conf`, for scalafix, or `.scalafmt-extra.conf`, for scalafmt, and adding there your extra configurations.
-
-For example, for adding a new scalafix rule:
-
-```hocon
-# .scalafix-extra.conf
-
-rules += MyNewRule
-```
+All included plugins are automatically activated, so you don't have to do anything to start using them.
 
 ### Running scalafix in all configurations
 
-Enabling this plugin also adds a few interesting commands that aren't available in the original plugins. For example, executing the `scalafix` task in all the available configurations. This can be done by executing the `scalafixAll` command:
+This plugin adds a `scalafixAll` new command that runs `scalafix` in all available configurations:
 
 ```sbt
 scalafixAll
@@ -69,7 +48,7 @@ scalafixAll --auto-suppress-linter-errors
 
 This plugin also enables a `fix` command to every project in the build.
 
-This command can be used to launch both scalafmt and scalafix in all supported configurations.
+This command can be used to launch both `scalafmt` and `scalafix` in all supported configurations.
 
 ```sbt
 fix
