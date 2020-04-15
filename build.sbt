@@ -3,7 +3,7 @@ ThisBuild / organization := "com.alejandrohdezma"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-addCommandAlias("ci-test", "scalafixEnable; fix --check; docs/mdoc")
+addCommandAlias("ci-test", "fix --check; docs/mdoc")
 addCommandAlias("ci-docs", "docs/mdoc; headerCreateAll")
 
 skip in publish := true
