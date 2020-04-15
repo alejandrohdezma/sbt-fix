@@ -16,8 +16,6 @@
 
 package com.alejandrohdezma.sbt.fix
 
-import scala.sys.process._
-
 import sbt.Keys._
 import sbt._
 
@@ -35,24 +33,12 @@ import scalafix.sbt.ScalafixPlugin.autoImport._
  */
 object ScalafixWithDefaultsPlugin extends AutoPlugin {
 
-  object autoImport {
-
-    lazy val scalafixConfigLocation: SettingKey[URL] = settingKey[URL] {
-      s"Location of the remote scalafix config"
-    }
-
-  }
-
-  import autoImport._
-
   override def trigger: PluginTrigger = allRequirements
 
   override def requires: Plugins = ScalafixPlugin
 
   override def buildSettings: Seq[Setting[_]] = Seq(
-    SettingKey[Unit]("generateScalafixConfig") := generateConfig.value,
-    scalafixConfig                             := Some(config),
-    scalacOptions                              += "-P:semanticdb:synthetics:on",
+    scalacOptions += "-P:semanticdb:synthetics:on",
     addCompilerPlugin(scalafixSemanticdb)
   )
 
@@ -64,20 +50,6 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
       .mkString("; ")
 
     Command.process(command, state)
-  }
-
-  private val config = file(".scalafix.conf")
-
-  @SuppressWarnings(Array("scalafix:Disable.exists"))
-  private lazy val generateConfig = Def.setting {
-    val including = file(".scalafix-extra.conf")
-    val remote    = scalafixConfigLocation.value
-
-    if (including.exists)
-      (remote #> config #&& (including #>> config)).!
-    else (remote #> config).!
-
-    ()
   }
 
 }

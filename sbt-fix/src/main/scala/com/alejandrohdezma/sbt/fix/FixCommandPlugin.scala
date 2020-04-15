@@ -17,7 +17,7 @@
 package com.alejandrohdezma.sbt.fix
 
 import sbt.Keys._
-import sbt.{Command, Def, _}
+import sbt._
 
 import org.scalafmt.sbt.ScalafmtPlugin
 import scalafix.sbt.ScalafixPlugin

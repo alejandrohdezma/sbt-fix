@@ -7,12 +7,6 @@ ThisBuild / scalafixDependencies ++= Seq(
   "com.eed3si9n.fix"    %% "scalafix-noinfer" % "0.1.0-M1"
 )
 
-ThisBuild / scalafixConfigLocation := url {
-  "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafix.conf"
-}
-ThisBuild / scalafmtConfigLocation := url {
-  "https://github.com/alejandrohdezma/sbt-fix-defaults/releases/download/v0.0.6/default.scalafmt.conf"
-}
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
 addCommandAlias("ci-test", "fix --check; docs/mdoc")
