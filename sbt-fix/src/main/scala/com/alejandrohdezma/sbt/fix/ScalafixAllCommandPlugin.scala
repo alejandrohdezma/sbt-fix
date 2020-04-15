@@ -22,28 +22,24 @@ import sbt._
 import scalafix.sbt.ScalafixPlugin
 
 /**
- * This plugin enables Scalafix plugin with several extra rules,
- * downloads configuration from remote url and writes it to file
- * so Scalafix can use it.
- *
- * Also adds a `scalafixAll` new command that launches scalafix
+ * This plugin adds a `scalafixAll` new command that launches scalafix
  * in all available configurations. All scalafix arguments can
  * be used.
  */
-object ScalafixWithDefaultsPlugin extends AutoPlugin {
+object ScalafixAllCommandPlugin extends AutoPlugin {
 
   override def trigger: PluginTrigger = allRequirements
 
   override def requires: Plugins = ScalafixPlugin
 
-  override def projectSettings: Seq[Def.Setting[_]] = Seq(commands += scalafixAll)
+  override def projectSettings: Seq[Def.Setting[_]] = Seq {
+    commands += Command.args("scalafixAll", "<rule>") { (state, args) =>
+      val command = configsWithScalafix(state)
+        .map(c => s"$c:scalafix${args.foldLeft("")(_ + " " + _)}")
+        .mkString("; ")
 
-  private lazy val scalafixAll: Command = Command.args("scalafixAll", "<rule>") { (state, args) =>
-    val command = configsWithScalafix(state)
-      .map(c => s"$c:scalafix${args.foldLeft("")(_ + " " + _)}")
-      .mkString("; ")
-
-    Command.process(command, state)
+      Command.process(command, state)
+    }
   }
 
 }
