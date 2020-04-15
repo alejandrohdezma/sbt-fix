@@ -6,6 +6,7 @@
 
 ⚠️ **Breaking changes**
 
+- Set scalafix & scalafmt dependencies as `Provided` [\#107](https://github.com/alejandrohdezma/sbt-fix/pull/107) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Remove configuration synchronisation code [\#100](https://github.com/alejandrohdezma/sbt-fix/pull/100) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Remove `sbt-fix-it` module [\#97](https://github.com/alejandrohdezma/sbt-fix/pull/97) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - `scalafixDependencies` should be added by config providers [\#91](https://github.com/alejandrohdezma/sbt-fix/pull/91) ([alejandrohdezma](https://github.com/alejandrohdezma))
