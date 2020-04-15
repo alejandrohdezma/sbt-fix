@@ -8,6 +8,9 @@ addCommandAlias("ci-docs", "docs/mdoc; headerCreateAll")
 
 skip in publish := true
 
+lazy val scalafix = "ch.epfl.scala" % "sbt-scalafix" % "[0.9.0,)" % Provided // scala-steward:off
+lazy val scalafmt = "org.scalameta" % "sbt-scalafmt" % "[2.0.0,)" % Provided // scala-steward:off
+
 lazy val docs = project
   .in(file("sbt-fix-docs"))
   .enablePlugins(MdocPlugin)
@@ -16,5 +19,5 @@ lazy val docs = project
 
 lazy val `sbt-fix` = project
   .enablePlugins(SbtPlugin)
-  .settings(addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.12"))
-  .settings(addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.3.2"))
+  .settings(addSbtPlugin(scalafix))
+  .settings(addSbtPlugin(scalafmt))
