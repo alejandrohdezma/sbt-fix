@@ -20,7 +20,6 @@ import sbt.Keys._
 import sbt._
 
 import scalafix.sbt.ScalafixPlugin
-import scalafix.sbt.ScalafixPlugin.autoImport._
 
 /**
  * This plugin enables Scalafix plugin with several extra rules,
@@ -36,11 +35,6 @@ object ScalafixWithDefaultsPlugin extends AutoPlugin {
   override def trigger: PluginTrigger = allRequirements
 
   override def requires: Plugins = ScalafixPlugin
-
-  override def buildSettings: Seq[Setting[_]] = Seq(
-    scalacOptions += "-P:semanticdb:synthetics:on",
-    addCompilerPlugin(scalafixSemanticdb)
-  )
 
   override def projectSettings: Seq[Def.Setting[_]] = Seq(commands += scalafixAll)
 
