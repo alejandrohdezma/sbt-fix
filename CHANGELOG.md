@@ -6,6 +6,7 @@
 
 ⚠️ **Breaking changes**
 
+- Remove configuration synchronisation code [\#100](https://github.com/alejandrohdezma/sbt-fix/pull/100) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Remove `sbt-fix-it` module [\#97](https://github.com/alejandrohdezma/sbt-fix/pull/97) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - `scalafixDependencies` should be added by config providers [\#91](https://github.com/alejandrohdezma/sbt-fix/pull/91) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Make extra config location a fixed value [\#88](https://github.com/alejandrohdezma/sbt-fix/pull/88) ([alejandrohdezma](https://github.com/alejandrohdezma))
