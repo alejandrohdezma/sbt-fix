@@ -38,17 +38,18 @@ object FixCommandPlugin extends AutoPlugin {
 
   override def requires: Plugins = ScalafixPlugin && ScalafmtPlugin
 
-  override def projectSettings: Seq[Def.Setting[_]] = Seq {
-    commands += Command.args("fix", "--check | -c") {
-      case (s, Seq("--check")) => Command.process(check, s)
-      case (s, Seq("-c"))      => Command.process(check, s)
-      case (state, Nil)        => Command.process(fix, state)
-      case (state, args) =>
-        state.log.error(s"Invalid argument `${args.mkString(" ")}`")
-        state.log.error(s"The only argument allowed is `--check`")
-        state.fail
+  override def projectSettings: Seq[Def.Setting[_]] =
+    Seq {
+      commands += Command.args("fix", "--check | -c") {
+        case (s, Seq("--check")) => Command.process(check, s)
+        case (s, Seq("-c"))      => Command.process(check, s)
+        case (state, Nil)        => Command.process(fix, state)
+        case (state, args) =>
+          state.log.error(s"Invalid argument `${args.mkString(" ")}`")
+          state.log.error(s"The only argument allowed is `--check`")
+          state.fail
+      }
     }
-  }
 
   lazy val check = "all scalafmtCheckAll scalafmtSbtCheck; scalafixEnable; scalafixAll --check"
   lazy val fix   = "scalafixAll; all scalafmtAll scalafmtSbt"
