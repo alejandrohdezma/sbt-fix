@@ -32,14 +32,15 @@ object ScalafixAllCommandPlugin extends AutoPlugin {
 
   override def requires: Plugins = ScalafixPlugin
 
-  override def projectSettings: Seq[Def.Setting[_]] = Seq {
-    commands += Command.args("scalafixAll", "<rule>") { (state, args) =>
-      val command = configsWithScalafix(state)
-        .map(c => s"$c:scalafix${args.foldLeft("")(_ + " " + _)}")
-        .mkString("; ")
+  override def projectSettings: Seq[Def.Setting[_]] =
+    Seq {
+      commands += Command.args("scalafixAll", "<rule>") { (state, args) =>
+        val command = configsWithScalafix(state)
+          .map(c => s"$c:scalafix${args.foldLeft("")(_ + " " + _)}")
+          .mkString("; ")
 
-      Command.process(command, state)
+        Command.process(command, state)
+      }
     }
-  }
 
 }
