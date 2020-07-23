@@ -1,24 +1,20 @@
-ThisBuild / scalaVersion := "2.12.11"
-ThisBuild / organization := "com.alejandrohdezma"
-
-Global / onChangedBuildSource := ReloadOnSourceChanges
+ThisBuild / scalaVersion    := "2.12.12"
+ThisBuild / organization    := "com.alejandrohdezma"
+ThisBuild / skip in publish := true
 
 addCommandAlias("ci-test", "fix --check; mdoc")
 addCommandAlias("ci-docs", "github; mdoc; headerCreateAll")
 addCommandAlias("ci-publish", "github; ci-release")
 
-skip in publish := true
+lazy val scalafix = "ch.epfl.scala" % "sbt-scalafix" % "[0.9.18,)" % Provided // scala-steward:off
+lazy val scalafmt = "org.scalameta" % "sbt-scalafmt" % "[2.0.0,)"  % Provided // scala-steward:off
 
-lazy val scalafix = "ch.epfl.scala" % "sbt-scalafix" % "[0.9.0,)" % Provided // scala-steward:off
-lazy val scalafmt = "org.scalameta" % "sbt-scalafmt" % "[2.0.0,)" % Provided // scala-steward:off
-
-lazy val docs = project
-  .in(file("sbt-fix-docs"))
+lazy val documentation = project
   .enablePlugins(MdocPlugin)
   .settings(mdocOut := file("."))
-  .settings(skip in publish := true)
 
 lazy val `sbt-fix` = project
   .enablePlugins(SbtPlugin)
+  .settings(skip in publish := false)
   .settings(addSbtPlugin(scalafix))
   .settings(addSbtPlugin(scalafmt))
