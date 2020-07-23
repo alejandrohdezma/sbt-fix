@@ -1,5 +1,43 @@
 # Changelog
 
+## [v0.6.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.6.0) (2020-07-23)
+
+[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.5.0...v0.6.0)
+
+🚀 **Features**
+
+- Remove `scalafixAll` command [\#136](https://github.com/alejandrohdezma/sbt-fix/pull/136) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
+📈 **Dependency updates**
+
+- Update sbt-scalafix to 0.9.19 [\#135](https://github.com/alejandrohdezma/sbt-fix/pull/135) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix to 0.9.18 [\#134](https://github.com/alejandrohdezma/sbt-fix/pull/134) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt to 1.3.13 [\#133](https://github.com/alejandrohdezma/sbt-fix/pull/133) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-tpolecat to 0.1.13 [\#132](https://github.com/alejandrohdezma/sbt-fix/pull/132) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-mdoc to 2.2.3 [\#131](https://github.com/alejandrohdezma/sbt-fix/pull/131) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-mdoc to 2.2.2 [\#130](https://github.com/alejandrohdezma/sbt-fix/pull/130) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix to 0.9.17 [\#129](https://github.com/alejandrohdezma/sbt-fix/pull/129) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-mdoc to 2.2.1 [\#128](https://github.com/alejandrohdezma/sbt-fix/pull/128) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-tpolecat to 0.1.12 [\#127](https://github.com/alejandrohdezma/sbt-fix/pull/127) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt to 1.3.12 [\#126](https://github.com/alejandrohdezma/sbt-fix/pull/126) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafmt-defaults to 0.2.0 [\#125](https://github.com/alejandrohdezma/sbt-fix/pull/125) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix to 0.9.16 [\#124](https://github.com/alejandrohdezma/sbt-fix/pull/124) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix-defaults to 0.2.3 [\#123](https://github.com/alejandrohdezma/sbt-fix/pull/123) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafmt-defaults to 0.1.1 [\#122](https://github.com/alejandrohdezma/sbt-fix/pull/122) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafmt to 2.4.0 [\#121](https://github.com/alejandrohdezma/sbt-fix/pull/121) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-mdoc to 2.2.0 [\#120](https://github.com/alejandrohdezma/sbt-fix/pull/120) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix-defaults to 0.2.2 [\#119](https://github.com/alejandrohdezma/sbt-fix/pull/119) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix-defaults to 0.2.1 [\#118](https://github.com/alejandrohdezma/sbt-fix/pull/118) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix-defaults to 0.2.0 [\#117](https://github.com/alejandrohdezma/sbt-fix/pull/117) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-scalafix to 0.9.15 [\#116](https://github.com/alejandrohdezma/sbt-fix/pull/116) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-github to version 0.8.2 [\#115](https://github.com/alejandrohdezma/sbt-fix/pull/115) ([alejandrohdezma](https://github.com/alejandrohdezma))
+- Update sbt-ci-release to 1.5.3 [\#114](https://github.com/alejandrohdezma/sbt-fix/pull/114) ([scala-steward](https://github.com/scala-steward))
+- Update Scala, SBT & plugins to latest version [\#112](https://github.com/alejandrohdezma/sbt-fix/pull/112) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
+**Merged pull requests:**
+
+- Add CODEOWNERS [\#113](https://github.com/alejandrohdezma/sbt-fix/pull/113) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
 ## [v0.5.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.5.0) (2020-04-15)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.4.0...v0.5.0)
