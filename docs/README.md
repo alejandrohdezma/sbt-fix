@@ -6,9 +6,6 @@
 >
 > If you want to provide your own organization's configuration you can use the previous repositories as templates and edit the `.scalafix.conf` and `.scalafmt.conf` at will.
 
-```scala mdoc:toc
-```
-
 ## Installation
 
 Add the following line to your `plugins.sbt` file:
@@ -19,34 +16,7 @@ addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "@VERSION@")
 
 ## Usage
 
-All included plugins are automatically activated, so you don't have to do anything to start using them.
-
-### Running scalafix in all configurations
-
-This plugin adds a `scalafixAll` new command that runs `scalafix` in all available configurations:
-
-```sbt
-scalafixAll
-```
-
-Also, this command accepts the same arguments as `scalafix`, so we can:
-
-```sbt
-// Execute a single rule
-scalafixAll DisableSyntax
-
-// Check without altering files
-scalafixAll --check
-
-// Insert /* scalafix:ok */ suppressions instead of reporting linter errors.
-scalafixAll --auto-suppress-linter-errors
-```
-
-> For all the other possible arguments, refer to [scalafix docs](https://scalacenter.github.io/scalafix/docs/users/installation.html#help)
-
-### Running both scalafix & scalafmt in a single command
-
-This plugin also enables a `fix` command to every project in the build.
+This plugin adds a `fix` command to every project in the build.
 
 This command can be used to launch both `scalafmt` and `scalafix` in all supported configurations.
 
@@ -54,13 +24,11 @@ This command can be used to launch both `scalafmt` and `scalafix` in all support
 fix
 ```
 
-It can also be used for checking that all files have been fixed with both tools, exiting with non-zero code on violations, by appending the `--check` argument.
+It can also be used for checking that all files have been fixed with both tools, exiting with non-zero code on violations, by appending the `--check` argument (which can be used in CI to check formatting easily).
 
 ```sbt
 fix --check
 ```
-
-Which can be used in CI to check formatting easily.
 
 [github-action]: https://github.com/alejandrohdezma/sbt-fix/actions
 [github-action-badge]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Falejandrohdezma%2Fsbt-fix%2Fbadge%3Fref%3Dmaster&style=flat
