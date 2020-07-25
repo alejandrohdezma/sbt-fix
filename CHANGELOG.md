@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.6.1](https://github.com/alejandrohdezma/sbt-fix/tree/v0.6.1) (2020-07-25)
+
+[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.6.0...v0.6.1)
+
+**Merged pull requests:**
+
+- `scalafixAll` should not be called with `all` [\#137](https://github.com/alejandrohdezma/sbt-fix/pull/137) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
 ## [v0.6.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.6.0) (2020-07-23)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.5.0...v0.6.0)
