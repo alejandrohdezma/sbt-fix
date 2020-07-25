@@ -51,7 +51,7 @@ object FixCommandPlugin extends AutoPlugin {
       }
     }
 
-  lazy val check = "all scalafmtCheckAll scalafmtSbtCheck; scalafixEnable; all scalafixAll --check"
+  lazy val check = "all scalafmtCheckAll scalafmtSbtCheck; scalafixEnable; scalafixAll --check"
   lazy val fix   = "all scalafixAll; all scalafmtAll scalafmtSbt"
 
 }
