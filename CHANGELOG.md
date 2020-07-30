@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.7.0](https://github.com/alejandrohdezma/sbt-fix/tree/v0.7.0) (2020-07-30)
+
+[Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.6.1...v0.7.0)
+
+⚠️ **Breaking changes**
+
+- Remove `scalafixEnable` from `fix --check` [\#138](https://github.com/alejandrohdezma/sbt-fix/pull/138) ([alejandrohdezma](https://github.com/alejandrohdezma))
+
 ## [v0.6.1](https://github.com/alejandrohdezma/sbt-fix/tree/v0.6.1) (2020-07-25)
 
 [Full Changelog](https://github.com/alejandrohdezma/sbt-fix/compare/v0.6.0...v0.6.1)
@@ -96,7 +104,6 @@
 
 - First run scalafix, then scalafmt [\#44](https://github.com/alejandrohdezma/sbt-fix/pull/44) ([sideeffffect](https://github.com/sideeffffect))
 - Support a pretty simple offline mode [\#42](https://github.com/alejandrohdezma/sbt-fix/pull/42) ([alejandrohdezma](https://github.com/alejandrohdezma))
-- Ensure we get notified of new scalafix rules versions by scala-steward [\#40](https://github.com/alejandrohdezma/sbt-fix/pull/40) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
 🐛 **Bug Fixes**
 
@@ -122,6 +129,7 @@
 
 🚀 **Features**
 
+- Ensure we get notified of new scalafix rules versions by scala-steward [\#40](https://github.com/alejandrohdezma/sbt-fix/pull/40) ([alejandrohdezma](https://github.com/alejandrohdezma))
 - Remove dependency on `scalaj-http` [\#28](https://github.com/alejandrohdezma/sbt-fix/pull/28) ([alejandrohdezma](https://github.com/alejandrohdezma))
 
 📈 **Dependency updates**

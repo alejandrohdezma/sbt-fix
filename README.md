@@ -11,7 +11,7 @@
 Add the following line to your `plugins.sbt` file:
 
 ```sbt
-addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.6.1")
+addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.7.0")
 ```
 
 ## Usage
