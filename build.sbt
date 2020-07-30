@@ -1,6 +1,8 @@
-ThisBuild / scalaVersion    := "2.12.12"
-ThisBuild / organization    := "com.alejandrohdezma"
-ThisBuild / skip in publish := true
+ThisBuild / scalaVersion      := "2.12.12"
+ThisBuild / organization      := "com.alejandrohdezma"
+ThisBuild / skip in publish   := true
+ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
 addCommandAlias("ci-test", "fix --check; mdoc")
 addCommandAlias("ci-docs", "github; mdoc; headerCreateAll")
