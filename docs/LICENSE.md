@@ -186,7 +186,9 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright (C)  @YEAR_RANGE@ @COPYRIGHT_OWNER@
+   Copyright 2018 Martin Duhem
+   Copyright 2018 Jorge Vicente Cantero
+   Copyright 2018 EPFL (École Polytechnique Federal de Lausanne)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
