@@ -24,12 +24,10 @@ import scalafix.sbt.ScalafixPlugin
 
 /** Adds a `fix` command to every project in the build.
   *
-  * This command can be used to launch both scalafmt and scalafix in all
-  * supported configurations.
+  * This command can be used to launch both scalafmt and scalafix in all supported configurations.
   *
-  * It can also be used for checking that all files have been fixed
-  * with both tools, exiting with non-zero code on violations, by appending
-  * the `--check` argument.
+  * It can also be used for checking that all files have been fixed with both tools, exiting with non-zero code on
+  * violations, by appending the `--check` argument.
   */
 object FixCommandPlugin extends AutoPlugin {
 
@@ -51,6 +49,7 @@ object FixCommandPlugin extends AutoPlugin {
     }
 
   lazy val check = "all scalafmtCheckAll scalafmtSbtCheck; scalafixAll --check"
+
   lazy val fix   = "all scalafixAll; all scalafmtAll scalafmtSbt"
 
 }
