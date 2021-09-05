@@ -50,6 +50,6 @@ object FixCommandPlugin extends AutoPlugin {
 
   lazy val check = "all scalafmtCheckAll scalafmtSbtCheck; scalafixAll --check"
 
-  lazy val fix   = "all scalafixAll; all scalafmtAll scalafmtSbt"
+  lazy val fix = "all scalafixAll; all scalafmtAll scalafmtSbt"
 
 }
