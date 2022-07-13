@@ -78,7 +78,7 @@ jobs:
       - name: Run `sbt fix`
         uses: alejandrohdezma/actions/scala@v1
         with:
-          jvm: openjdk:1.17
+          jvm: liberica:17
           task: fix
 
       - name: Commit changes by `sbt fix`
@@ -98,9 +98,8 @@ jobs:
       fail-fast: false
       matrix:
         jdk:
-          - adopt:1.8
-          - adopt:1.11
-          - openjdk:1.17
+          - liberica:11
+          - liberica:17
     steps:
       - name: Checkout project
         uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # v2.3.5
