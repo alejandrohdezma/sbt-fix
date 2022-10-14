@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion                  := "2.12.17"
+ThisBuild / scalaVersion                  := "2.13.10"
 ThisBuild / organization                  := "com.alejandrohdezma"
 ThisBuild / skip in publish               := true
 ThisBuild / pluginCrossBuild / sbtVersion := "1.2.8"
