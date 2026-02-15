@@ -41,7 +41,7 @@ object FixCommandPlugin extends AutoPlugin {
         case (s, Seq("--check")) => Command.process(check, s)
         case (s, Seq("-c"))      => Command.process(check, s)
         case (state, Nil)        => Command.process(fix, state)
-        case (state, args) =>
+        case (state, args)       =>
           state.log.error(s"Invalid argument `${args.mkString(" ")}`")
           state.log.error("The only argument allowed is `--check`")
           state.fail
