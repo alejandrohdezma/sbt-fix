@@ -16,40 +16,49 @@
 
 package com.alejandrohdezma.sbt.fix
 
-import sbt.Keys._
 import sbt._
 
 import org.scalafmt.sbt.ScalafmtPlugin
+import org.scalafmt.sbt.ScalafmtPlugin.autoImport._
 import scalafix.sbt.ScalafixPlugin
+import scalafix.sbt.ScalafixPlugin.autoImport.scalafixAll
 
-/** Adds a `fix` command to every project in the build.
+/** Adds a `fix` task to every project in the build.
   *
-  * This command can be used to launch both scalafmt and scalafix in all supported configurations.
+  * This task can be used to launch both scalafmt and scalafix in all supported configurations.
   *
   * It can also be used for checking that all files have been fixed with both tools, exiting with non-zero code on
   * violations, by appending the `--check` argument.
+  *
+  * The task can be scoped to a specific project: `my-project/fix` or `my-project/fix --check`.
   */
 object FixCommandPlugin extends AutoPlugin {
+
+  object autoImport {
+
+    val fix = inputKey[Unit]("Launch both scalafmt and scalafix in all supported configurations")
+
+  }
+
+  import autoImport._
 
   override def trigger: PluginTrigger = allRequirements
 
   override def requires: Plugins = ScalafixPlugin && ScalafmtPlugin
 
-  override def projectSettings: Seq[Def.Setting[_]] =
-    Seq {
-      commands += Command.args("fix", "--check | -c") {
-        case (s, Seq("--check")) => Command.process(check, s)
-        case (s, Seq("-c"))      => Command.process(check, s)
-        case (state, Nil)        => Command.process(fix, state)
-        case (state, args)       =>
-          state.log.error(s"Invalid argument `${args.mkString(" ")}`")
-          state.log.error("The only argument allowed is `--check`")
-          state.fail
-      }
-    }
+  val parser = Def.setting(sbt.complete.DefaultParsers.spaceDelimited("--check | -c"))
 
-  lazy val check = "all scalafmtCheckAll scalafmtSbtCheck; scalafixAll --check"
-
-  lazy val fix = "all scalafixAll; all scalafmtAll scalafmtSbt"
+  override def projectSettings: Seq[Def.Setting[_]] = Seq(
+    fix := InputTask
+      .createDyn(InputTask.initParserAsInput(parser))(Def.task[Seq[String] => Def.Initialize[Task[Unit]]] {
+        case Seq("--check") | Seq("-c") =>
+          Def.sequential(ThisProject / scalafmtCheckAll, Compile / scalafmtSbtCheck, scalafixAll.toTask(" --check"))
+        case Nil =>
+          Def.sequential(scalafixAll.toTask(""), ThisProject / scalafmtAll, Compile / scalafmtSbt)
+        case args =>
+          sys.error(s"Invalid argument `${args.mkString(" ")}`. The only argument allowed is `--check`")
+      })
+      .evaluated
+  )
 
 }
