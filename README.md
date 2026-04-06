@@ -5,14 +5,14 @@
 Add the following line to your `plugins.sbt` file:
 
 ```sbt
-addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.7.2")
+addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.8.0")
 ```
 
 ## Usage
 
-This plugin adds a `fix` command to every project in the build.
+This plugin adds a `fix` task to every project in the build.
 
-This command can be used to launch both `scalafmt` and `scalafix` in all supported configurations.
+This task can be used to launch both `scalafmt` and `scalafix` in all supported configurations.
 
 ```sbt
 fix
@@ -22,4 +22,11 @@ It can also be used for checking that all files have been fixed with both tools,
 
 ```sbt
 fix --check
+```
+
+Both usages can be scoped to a specific project in the build:
+
+```sbt
+my-project/fix
+my-project/fix --check
 ```
