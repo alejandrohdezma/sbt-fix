@@ -31,12 +31,23 @@ import scalafix.sbt.ScalafixPlugin.autoImport.scalafixAll
   * violations, by appending the `--check` argument.
   *
   * The task can be scoped to a specific project: `my-project/fix` or `my-project/fix --check`.
+  *
+  * Additional tasks can be plugged in via the `fixExtra` / `fixCheckExtra` settings; they run after the built-in
+  * scalafmt/scalafix steps.
   */
 object FixCommandPlugin extends AutoPlugin {
 
   object autoImport {
 
     val fix = inputKey[Unit]("Launch both scalafmt and scalafix in all supported configurations")
+
+    val fixExtra = settingKey[Seq[Def.Initialize[Task[Unit]]]](
+      "Additional tasks chained after the built-in scalafmt/scalafix steps when `fix` is invoked"
+    )
+
+    val fixCheckExtra = settingKey[Seq[Def.Initialize[Task[Unit]]]](
+      "Additional tasks chained after the built-in scalafmt/scalafix checks when `fix --check` is invoked"
+    )
 
   }
 
@@ -48,13 +59,22 @@ object FixCommandPlugin extends AutoPlugin {
 
   val parser = Def.setting(sbt.complete.DefaultParsers.spaceDelimited("--check | -c"))
 
+  private def chain(tasks: Seq[Def.Initialize[Task[Unit]]]) = tasks.reduce(Def.sequential(_, _))
+
   override def projectSettings: Seq[Def.Setting[_]] = Seq(
-    fix := InputTask
+    fixExtra      := Seq.empty,
+    fixCheckExtra := Seq.empty,
+    fix           := InputTask
       .createDyn(InputTask.initParserAsInput(parser))(Def.task[Seq[String] => Def.Initialize[Task[Unit]]] {
         case Seq("--check") | Seq("-c") =>
-          Def.sequential(ThisProject / scalafmtCheckAll, Compile / scalafmtSbtCheck, scalafixAll.toTask(" --check"))
+          chain {
+            ThisProject / scalafmtCheckAll +: Compile / scalafmtSbtCheck +: scalafixAll.toTask(" --check") +:
+              fixCheckExtra.value
+          }
+
         case Nil =>
-          Def.sequential(scalafixAll.toTask(""), ThisProject / scalafmtAll, Compile / scalafmtSbt)
+          chain(scalafixAll.toTask("") +: ThisProject / scalafmtAll +: Compile / scalafmtSbt +: fixExtra.value)
+
         case args =>
           sys.error(s"Invalid argument `${args.mkString(" ")}`. The only argument allowed is `--check`")
       })
