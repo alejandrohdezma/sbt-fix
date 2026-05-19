@@ -17,8 +17,8 @@
 package com.alejandrohdezma.sbt.fix
 
 import sbt.Keys._
-import sbt.util.Level
 import sbt._
+import sbt.util.Level
 
 import org.scalafmt.sbt.ScalafmtPlugin
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport._
