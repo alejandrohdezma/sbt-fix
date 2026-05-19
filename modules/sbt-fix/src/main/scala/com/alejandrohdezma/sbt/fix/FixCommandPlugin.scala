@@ -18,6 +18,7 @@ package com.alejandrohdezma.sbt.fix
 
 import sbt.Keys._
 import sbt._
+import sbt.util.Level
 
 import org.scalafmt.sbt.ScalafmtPlugin
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport._
@@ -33,10 +34,12 @@ import scalafix.sbt.ScalafixPlugin.autoImport.scalafixAll
   *
   * The task can be scoped to a specific project: `my-project/fix` or `my-project/fix --check`.
   *
-  * In check mode the plugin runs every check even if earlier ones fail. When the `CI` environment variable is set, the
-  * run also prints a labelled banner per check, logs a `PASS`/`FAIL` summary, and writes a Markdown status table to
-  * `$$GITHUB_STEP_SUMMARY` (when set) or to `target/fix-check-summary.md`, so the report can be surfaced as a GitHub
-  * Actions job summary. Local (non-CI) invocations stay quiet.
+  * In check mode the plugin runs every check even if earlier ones fail. A check tagged with `.abortOnError` (see
+  * [[autoImport.NamedCheck]]) is the exception: its failure marks the remaining checks as Skipped without running them.
+  * When the `CI` environment variable is set, the run also prints a labelled banner per check, logs a ✅ / ❌ / ⏭️
+  * summary, and writes a Markdown status table to `$$GITHUB_STEP_SUMMARY` (when set) or to
+  * `target/fix-check-summary.md`, so the report can be surfaced as a GitHub Actions job summary. Local (non-CI)
+  * invocations stay quiet.
   *
   * Additional steps can be plugged in via the `fixExtra` (write mode) and `fixCheckExtra` (check mode) settings; they
   * run after the built-in scalafmt/scalafix steps.
@@ -64,9 +67,10 @@ object FixCommandPlugin extends AutoPlugin {
     /** A named check in the `fix --check` pipeline.
       *
       * The `name` is what appears in the per-check banner and in the Markdown summary table; `task` is the underlying
-      * check to run.
+      * check to run. When `aborts` is true, the failure of this check stops the rest of the pipeline (subsequent checks
+      * are reported as Skipped); the default is `false` (continue-on-error).
       */
-    final case class NamedCheck(name: String, task: Def.Initialize[Task[Unit]]) {
+    final case class NamedCheck(name: String, task: Def.Initialize[Task[Unit]], aborts: Boolean = false) {
 
       /** Returns a copy of this check with the given display name. */
       def named(newName: String): NamedCheck = copy(name = newName)
@@ -77,6 +81,16 @@ object FixCommandPlugin extends AutoPlugin {
         * label.
         */
       def mapTask(f: Def.Initialize[Task[Unit]] => Def.Initialize[Task[Unit]]): NamedCheck = copy(task = f(task))
+
+      /** Marks this check so its failure stops the rest of the `fix --check` / `ci` pipeline; subsequent checks are
+        * reported as Skipped (⏭️) without being run.
+        *
+        * Useful for foundational checks (e.g. `compile`) where running downstream checks after a failure is pointless.
+        */
+      def abortOnError: NamedCheck = copy(aborts = true)
+
+      /** Marks this check so its failure does not stop the pipeline (the default). Subsequent checks still run. */
+      def continueOnError: NamedCheck = copy(aborts = false)
 
     }
 
@@ -125,19 +139,19 @@ object FixCommandPlugin extends AutoPlugin {
     fix           := InputTask
       .createDyn(InputTask.initParserAsInput(parser))(Def.task[Seq[String] => Def.Initialize[Task[Unit]]] {
         case Seq("--check") | Seq("-c") =>
-          runChecks(
-            scalafmtCheckAll.acrossAggregated.named("scalafmt-check") +:
-              (Compile / scalafmtSbtCheck).acrossAggregated.named("scalafmt-sbt-check") +:
-              scalafixAll.toTask(" --check").acrossAggregated.named("scalafix-check") +: fixCheckExtra.value
-          )
+          runChecks {
+            scalafmtCheckAll.acrossAggregated.named("scalafmt") +:
+              (Compile / scalafmtSbtCheck).acrossAggregated.named("scalafmt-sbt") +:
+              scalafixAll.toTask(" --check").acrossAggregated.named("scalafix") +: fixCheckExtra.value
+          }
 
         case Nil =>
-          chain(
+          chain {
             scalafixAll.toTask("").acrossAggregated +:
               scalafmtAll.acrossAggregated +:
               (Compile / scalafmtSbt).acrossAggregated +:
               fixExtra.value
-          )
+          }
 
         case args =>
           sys.error(s"Invalid argument `${args.mkString(" ")}`. The only argument allowed is `--check`")
@@ -157,13 +171,26 @@ object FixCommandPlugin extends AutoPlugin {
     */
   private def isCI: Boolean = sys.env.contains("CI")
 
+  sealed abstract private class CheckResult(val emoji: String, val level: Level.Value)
+
+  private object CheckResult {
+
+    case object Passed extends CheckResult("✅", Level.Info)
+
+    case object Failed extends CheckResult("❌", Level.Error)
+
+    case object Skipped extends CheckResult("⏭️", Level.Info)
+
+  }
+
   /** Orchestrates a sequence of checks with continue-on-error semantics.
     *
-    * Every check runs via `.result` so a failure does not abort the chain. After all checks complete, aborts via
-    * `sys.error` if any check failed.
+    * Every check normally runs via `.result` so a failure does not abort the chain. A check tagged with `.abortOnError`
+    * is the exception: when it fails, all subsequent checks are marked as Skipped without being run. After the chain
+    * completes, aborts via `sys.error` if any check failed.
     *
-    * When [[isCI]] is true, also prints the ordered plan, logs a banner before each check, logs a `PASS`/`FAIL`
-    * summary, and writes a Markdown status table via [[writeMarkdownSummary]]. Local invocations stay quiet.
+    * When [[isCI]] is true, also prints the ordered plan, logs a banner before each check, logs a ✅ / ❌ / ⏭️ summary,
+    * and writes a Markdown status table via [[writeMarkdownSummary]]. Local invocations stay quiet.
     */
   private def runChecks(checks: Seq[NamedCheck]): Def.Initialize[Task[Unit]] = Def.taskDyn {
     val log = streams.value.log
@@ -173,34 +200,46 @@ object FixCommandPlugin extends AutoPlugin {
       checks.foreach(check => log.info(s"  - ${check.name}"))
     }
 
-    val tagged: Seq[Def.Initialize[Task[(String, Result[Unit])]]] = checks.map { check =>
-      Def.taskDyn {
-        if (isCI) {
-          log.info(s"==> ${check.name}")
-        }
-        check.task.map(_ => ()).result.map(r => check.name -> r)
-      }
-    }
+    val collected: Def.Initialize[Task[List[(NamedCheck, CheckResult)]]] =
+      checks.foldLeft(Def.task(List.empty[(NamedCheck, CheckResult)])) { (acc, check) =>
+        Def.taskDyn {
+          val previous = acc.value
+          val mustSkip = previous.exists {
+            case (c, CheckResult.Failed) => c.aborts
+            case _                       => false
+          }
 
-    val collected = tagged.foldLeft(Def.task(List.empty[(String, Result[Unit])])) { (acc, next) =>
-      Def.taskDyn {
-        val previous = acc.value
-        next.map(r => previous :+ r)
+          if (mustSkip) {
+            if (isCI) log.info(s"==> ${check.name} (skipped)")
+
+            Def.task(previous :+ (check -> CheckResult.Skipped))
+          } else {
+            Def.taskDyn {
+              if (isCI) log.info(s"==> ${check.name}")
+
+              check.task.map(_ => ()).result.map { r =>
+                val outcome = r match {
+                  case Value(_) => CheckResult.Passed
+                  case Inc(_)   => CheckResult.Failed
+                }
+
+                previous :+ (check -> outcome)
+              }
+            }
+          }
+        }
       }
-    }
 
     Def.task {
       val results = collected.value
-      val failed  = results.collect { case (name, Inc(_)) => name }
-      val passed  = results.collect { case (name, Value(_)) => name }
 
       if (isCI) {
         log.info("==> CI checks summary:")
-        passed.foreach(name => log.info(s"  PASS  $name"))
-        failed.foreach(name => log.error(s"  FAIL  $name"))
-
-        writeMarkdownSummary((LocalRootProject / target).value, scalaVersion.value, results, log)
+        results.foreach { case (c, result) => log.log(result.level, s"  ${result.emoji}  ${c.name}") }
+        writeMarkdownSummary((LocalRootProject / target).value, name.value, scalaVersion.value, results, log)
       }
+
+      val failed = results.collect { case (c, CheckResult.Failed) => c.name }
 
       if (failed.nonEmpty)
         sys.error(s"${failed.size} check(s) failed: ${failed.mkString(", ")}")
@@ -211,29 +250,31 @@ object FixCommandPlugin extends AutoPlugin {
     *
     * Appends to `$$GITHUB_STEP_SUMMARY` when that env var is set so the report surfaces on the GitHub Actions workflow
     * run page; otherwise writes to `fix-check-summary.md` under the build's root project `target` directory. The
-    * `scalaVersion` is included in the heading so cross-built runs produce distinct, identifiable blocks.
+    * project `name` and `scalaVersion` are included in the heading so per-project / cross-built runs produce distinct,
+    * identifiable blocks.
     */
   private def writeMarkdownSummary(
       rootTarget: File,
+      name: String,
       scalaVersion: String,
-      results: Seq[(String, Result[Unit])],
+      results: Seq[(NamedCheck, CheckResult)],
       log: Logger
   ): Unit = {
-    val md = new StringBuilder
-    md.append(s"# CI checks ($scalaVersion)\n\n")
-    md.append("| Check | Status |\n| --- | --- |\n")
+    val resultsSummary = results.map { case (c, result) => s"| ${c.name} | ${result.emoji} |" }.mkString("\n")
 
-    results.foreach {
-      case (name, Value(_)) => md.append(s"| $name | PASS |\n")
-      case (name, Inc(_))   => md.append(s"| $name | FAIL |\n")
-    }
+    val summary =
+      s"""# CI checks for $name ($scalaVersion)
+         |
+         || Check | Status |
+         || ----- | ------ |
+         |$resultsSummary""".stripMargin
 
     val output = sys.env
       .get("GITHUB_STEP_SUMMARY")
       .map(file(_))
       .getOrElse(rootTarget / "fix-check-summary.md")
 
-    IO.append(output, md.toString)
+    IO.append(output, summary)
     log.info(s"==> wrote summary to `${output.getAbsolutePath}`")
   }
 
