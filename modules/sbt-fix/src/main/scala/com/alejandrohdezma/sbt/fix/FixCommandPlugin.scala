@@ -125,19 +125,19 @@ object FixCommandPlugin extends AutoPlugin {
     fix           := InputTask
       .createDyn(InputTask.initParserAsInput(parser))(Def.task[Seq[String] => Def.Initialize[Task[Unit]]] {
         case Seq("--check") | Seq("-c") =>
-          runChecks(
-            scalafmtCheckAll.acrossAggregated.named("scalafmt-check") +:
-              (Compile / scalafmtSbtCheck).acrossAggregated.named("scalafmt-sbt-check") +:
-              scalafixAll.toTask(" --check").acrossAggregated.named("scalafix-check") +: fixCheckExtra.value
-          )
+          runChecks {
+            scalafmtCheckAll.acrossAggregated.named("scalafmt") +:
+              (Compile / scalafmtSbtCheck).acrossAggregated.named("scalafmt-sbt") +:
+              scalafixAll.toTask(" --check").acrossAggregated.named("scalafix") +: fixCheckExtra.value
+          }
 
         case Nil =>
-          chain(
+          chain {
             scalafixAll.toTask("").acrossAggregated +:
               scalafmtAll.acrossAggregated +:
               (Compile / scalafmtSbt).acrossAggregated +:
               fixExtra.value
-          )
+          }
 
         case args =>
           sys.error(s"Invalid argument `${args.mkString(" ")}`. The only argument allowed is `--check`")
@@ -196,10 +196,10 @@ object FixCommandPlugin extends AutoPlugin {
 
       if (isCI) {
         log.info("==> CI checks summary:")
-        passed.foreach(name => log.info(s"  PASS  $name"))
-        failed.foreach(name => log.error(s"  FAIL  $name"))
+        passed.foreach(name => log.info(s"  ✅  $name"))
+        failed.foreach(name => log.error(s"  ❌  $name"))
 
-        writeMarkdownSummary((LocalRootProject / target).value, scalaVersion.value, results, log)
+        writeMarkdownSummary((LocalRootProject / target).value, name.value, scalaVersion.value, results, log)
       }
 
       if (failed.nonEmpty)
@@ -215,17 +215,18 @@ object FixCommandPlugin extends AutoPlugin {
     */
   private def writeMarkdownSummary(
       rootTarget: File,
+      name: String,
       scalaVersion: String,
       results: Seq[(String, Result[Unit])],
       log: Logger
   ): Unit = {
     val md = new StringBuilder
-    md.append(s"# CI checks ($scalaVersion)\n\n")
+    md.append(s"# CI checks for $name ($scalaVersion)\n\n")
     md.append("| Check | Status |\n| --- | --- |\n")
 
     results.foreach {
-      case (name, Value(_)) => md.append(s"| $name | PASS |\n")
-      case (name, Inc(_))   => md.append(s"| $name | FAIL |\n")
+      case (name, Value(_)) => md.append(s"| $name | ✅ |\n")
+      case (name, Inc(_))   => md.append(s"| $name | ❌ |\n")
     }
 
     val output = sys.env
