@@ -80,13 +80,15 @@ object FixCommandPlugin extends AutoPlugin {
 
     }
 
-    /** Adds combinators to a `Def.Initialize[Task[Unit]]` so it can be turned into a [[NamedCheck]] or fanned out
-      * across all projects aggregated by the current one.
+    /** Adds combinators to any `Def.Initialize[Task[A]]` so it can be turned into a [[NamedCheck]] or fanned out across
+      * all projects aggregated by the current one.
       */
-    implicit class NamedCheckOps(private val task: Def.Initialize[Task[Unit]]) extends AnyVal {
+    implicit class NamedCheckOps[A](private val task: Def.Initialize[Task[A]]) extends AnyVal {
 
-      /** Wraps this task as a [[NamedCheck]] with the given display name. */
-      def named(name: String): NamedCheck = NamedCheck(name, task)
+      /** Wraps this task as a [[NamedCheck]] with the given display name. The task's result is discarded — the check
+        * pipeline only cares whether the task succeeded.
+        */
+      def named(name: String): NamedCheck = NamedCheck(name, task.map(_ => ()))
 
       /** Evaluates this task at every project aggregated by the project where `fix` / `fix --check` is invoked.
         *
