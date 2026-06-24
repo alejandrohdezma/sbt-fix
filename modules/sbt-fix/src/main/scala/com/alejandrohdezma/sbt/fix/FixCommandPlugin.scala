@@ -126,14 +126,14 @@ object FixCommandPlugin extends AutoPlugin {
     * plan/banner/summary block. Multi-project coverage is achieved internally via
     * [[autoImport.NamedCheckOps.acrossAggregated]].
     */
-  override def globalSettings: Seq[Def.Setting[_]] = Seq(
+  override def globalSettings = Seq(
     fix / aggregate := false,
     ci / aggregate  := false
   )
 
   val parser = Def.setting(sbt.complete.DefaultParsers.spaceDelimited("--check | -c"))
 
-  override def projectSettings: Seq[Def.Setting[_]] = Seq(
+  override def projectSettings = Seq(
     fixExtra      := Seq.empty,
     fixCheckExtra := Seq.empty,
     fix           := Def.inputTaskDyn {
