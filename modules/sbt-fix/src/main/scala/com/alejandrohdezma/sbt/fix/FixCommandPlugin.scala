@@ -136,8 +136,8 @@ object FixCommandPlugin extends AutoPlugin {
   override def projectSettings: Seq[Def.Setting[_]] = Seq(
     fixExtra      := Seq.empty,
     fixCheckExtra := Seq.empty,
-    fix           := InputTask
-      .createDyn(InputTask.initParserAsInput(parser))(Def.task[Seq[String] => Def.Initialize[Task[Unit]]] {
+    fix           := Def.inputTaskDyn {
+      parser.parsed match {
         case Seq("--check") | Seq("-c") =>
           runChecks {
             scalafmtCheckAll.acrossAggregated.named("scalafmt") +:
@@ -155,8 +155,8 @@ object FixCommandPlugin extends AutoPlugin {
 
         case args =>
           sys.error(s"Invalid argument `${args.mkString(" ")}`. The only argument allowed is `--check`")
-      })
-      .evaluated,
+      }
+    }.evaluated,
     ci := fix.toTask(" --check").value
   )
 
