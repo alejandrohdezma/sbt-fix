@@ -218,9 +218,9 @@ object FixCommandPlugin extends AutoPlugin {
               if (isCI) log.info(s"==> ${check.name}")
 
               check.task.map(_ => ()).result.map { r =>
-                val outcome = r match {
-                  case Value(_) => CheckResult.Passed
-                  case Inc(_)   => CheckResult.Failed
+                val outcome = r.toEither match {
+                  case Right(_) => CheckResult.Passed
+                  case Left(_)  => CheckResult.Failed
                 }
 
                 previous :+ (check -> outcome)
