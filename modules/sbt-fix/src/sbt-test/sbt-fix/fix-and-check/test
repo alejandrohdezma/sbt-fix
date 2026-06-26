@@ -1,0 +1,8 @@
+# fix --check fails while the sources are not formatted
+-> fix --check
+
+# fix reformats the sources (scalafmt) and runs scalafix
+> fix
+
+# fix --check now passes
+> fix --check
