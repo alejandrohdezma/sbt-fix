@@ -2,7 +2,7 @@ ThisBuild / scalaVersion                  := _root_.scalafix.sbt.BuildInfo.scala
 ThisBuild / crossScalaVersions            := Seq(scalaVersion.value, "3.8.4")
 ThisBuild / organization                  := "com.alejandrohdezma"
 ThisBuild / pluginCrossBuild / sbtVersion := scalaVersion.value.on(2)("1.2.8").getOrElse("2.0.0")
-ThisBuild / versionPolicyIntention        := Compatibility.BinaryAndSourceCompatible
+ThisBuild / versionPolicyIntention        := Compatibility.None
 
 addCommandAlias("ci-test", "fix --check; versionPolicyCheck; mdoc")
 addCommandAlias("ci-docs", "github; mdoc; headerCreateAll")
