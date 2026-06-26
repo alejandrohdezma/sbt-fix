@@ -126,18 +126,18 @@ object FixCommandPlugin extends AutoPlugin {
     * plan/banner/summary block. Multi-project coverage is achieved internally via
     * [[autoImport.NamedCheckOps.acrossAggregated]].
     */
-  override def globalSettings: Seq[Def.Setting[_]] = Seq(
+  override def globalSettings = Seq(
     fix / aggregate := false,
     ci / aggregate  := false
   )
 
   val parser = Def.setting(sbt.complete.DefaultParsers.spaceDelimited("--check | -c"))
 
-  override def projectSettings: Seq[Def.Setting[_]] = Seq(
+  override def projectSettings = Seq(
     fixExtra      := Seq.empty,
     fixCheckExtra := Seq.empty,
-    fix           := InputTask
-      .createDyn(InputTask.initParserAsInput(parser))(Def.task[Seq[String] => Def.Initialize[Task[Unit]]] {
+    fix           := Def.inputTaskDyn {
+      parser.parsed match {
         case Seq("--check") | Seq("-c") =>
           runChecks {
             scalafmtCheckAll.acrossAggregated.named("scalafmt") +:
@@ -155,8 +155,8 @@ object FixCommandPlugin extends AutoPlugin {
 
         case args =>
           sys.error(s"Invalid argument `${args.mkString(" ")}`. The only argument allowed is `--check`")
-      })
-      .evaluated,
+      }
+    }.evaluated,
     ci := fix.toTask(" --check").value
   )
 
@@ -218,9 +218,9 @@ object FixCommandPlugin extends AutoPlugin {
               if (isCI) log.info(s"==> ${check.name}")
 
               check.task.map(_ => ()).result.map { r =>
-                val outcome = r match {
-                  case Value(_) => CheckResult.Passed
-                  case Inc(_)   => CheckResult.Failed
+                val outcome = r.toEither match {
+                  case Right(_) => CheckResult.Passed
+                  case Left(_)  => CheckResult.Failed
                 }
 
                 previous :+ (check -> outcome)

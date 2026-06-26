@@ -2,7 +2,7 @@
 
 ## Installation
 
-Add the following line to your `plugins.sbt` file:
+The plugin is available for both sbt 1.x and sbt 2.x. To install it, add the following line to your `plugins.sbt` file:
 
 ```sbt
 addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "@VERSION@")
