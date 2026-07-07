@@ -219,8 +219,21 @@ object FixCommandPlugin extends AutoPlugin {
 
               check.task.map(_ => ()).result.map { r =>
                 val outcome = r.toEither match {
-                  case Right(_) => CheckResult.Passed
-                  case Left(_)  => CheckResult.Failed
+                  case Right(_)         => CheckResult.Passed
+                  case Left(incomplete) =>
+                    // Running through `.result` suppresses SBT's own reporting for the wrapped task, which
+                    // would otherwise hide failures whose details only live in the exception message (e.g.
+                    // `update`'s eviction report), so surface every underlying cause here.
+                    Incomplete
+                      .allExceptions(incomplete)
+                      .foreach { throwable =>
+                        Option(throwable.getMessage)
+                          .getOrElse(throwable.toString)
+                          .linesIterator
+                          .foreach(line => log.error(s"[${check.name}] $line"))
+                      }
+
+                    CheckResult.Failed
                 }
 
                 previous :+ (check -> outcome)
