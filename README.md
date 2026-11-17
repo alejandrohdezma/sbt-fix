@@ -5,7 +5,7 @@
 The plugin is available for both sbt 1.x and sbt 2.x. To install it, add the following line to your `plugins.sbt` file:
 
 ```sbt
-addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.13.1")
+addSbtPlugin("com.alejandrohdezma" %% "sbt-fix" % "0.14.0")
 ```
 
 ## Usage
