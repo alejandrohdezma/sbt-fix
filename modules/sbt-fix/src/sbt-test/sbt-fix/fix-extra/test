@@ -1,0 +1,5 @@
+# fix runs every task appended to fixExtra with +=
+> fix
+$ exists input-task-ran
+$ exists task-key-ran
+$ exists inline-task-ran
