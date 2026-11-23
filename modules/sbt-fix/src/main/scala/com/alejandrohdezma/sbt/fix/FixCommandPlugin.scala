@@ -46,7 +46,7 @@ import scalafix.sbt.ScalafixPlugin.autoImport.scalafixAll
   */
 object FixCommandPlugin extends AutoPlugin {
 
-  object autoImport {
+  object autoImport extends AutoImportCompat {
 
     val fix = inputKey[Unit] {
       "Launch both scalafmt and scalafix in all supported configurations"
